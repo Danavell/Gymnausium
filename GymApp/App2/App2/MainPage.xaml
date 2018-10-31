@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:App2"
+             x:Class="App2.MainPage">
+
+    <StackLayout>
+        <!-- Place new controls here -->
+
+        
+            <Label 
+            Text="Write a text in field under " 
+             x:Name="textFieldWrite"
+            HorizontalOptions="Center"
+                VerticalOptions="Start"
+               />
+        <Editor 
+            Text="Write here"
+            x:Name="editorWrite"
+            HorizontalOptions="Center"
+            />
+        <Label>
+            
+        </Label>
+    </StackLayout>
+
+</ContentPage>
