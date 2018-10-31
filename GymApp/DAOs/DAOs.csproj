@@ -45,5 +45,11 @@
     <Compile Include="IUsers.cs" />
     <Compile Include="Users.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Models\Model_Layer.csproj">
+      <Project>{40a00005-571e-47f9-85a5-d0e124444a1c}</Project>
+      <Name>Model_Layer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

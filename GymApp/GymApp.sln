@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App2", "App2\App2\App2.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAOs", "DAOs\DAOs.csproj", "{CCD6D174-A738-430B-A82D-4AA1E6BA8AA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model Layer", "Models\Model Layer.csproj", "{40A00005-571E-47F9-85A5-D0E124444A1C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model_Layer", "Models\Model_Layer.csproj", "{40A00005-571E-47F9-85A5-D0E124444A1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
