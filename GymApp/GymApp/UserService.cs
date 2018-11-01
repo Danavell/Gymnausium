@@ -9,30 +9,34 @@ using Data_Access_Layer;
 
 namespace GymAppService
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
     public class UserService : IUserService
     {
-        public bool BlockUser(User user)
+        private readonly IDAO _idao;
+        public UserService(IDAO dao)
+        {
+            this._idao = dao;
+        }
+        public bool BlockUser(ExternalInfoUser user)
         {
             throw new NotImplementedException();
         }
 
-        public bool Create(User user)
+        public bool Create(InternalInfoUser user)
         {
             throw new NotImplementedException();
         }
 
-        public bool Disable(User user)
+        public bool Disable(ExternalInfoUser user)
         {
             throw new NotImplementedException();
         }
 
-        public IList<User> GetMatchedUsers()
+        public ICollection<ExternalInfoUser> GetMatchedUsers()
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(User user)
+        public bool Update(InternalInfoUser user)
         {
             throw new NotImplementedException();
         }

@@ -13,18 +13,18 @@ namespace GymAppService
     public interface IUserService
     {
         [OperationContract]
-        bool Create(User user);
+        bool Create(InternalInfoUser user);
 
         [OperationContract]
-        bool Update(User user);
+        bool Update(InternalInfoUser user);
 
         [OperationContract]
-        bool Disable(User user);
+        bool Disable(ExternalInfoUser user);
 
         [OperationContract]
-        bool BlockUser(User user);
+        bool BlockUser(ExternalInfoUser user);
 
         [OperationContract]
-        IList<User> GetMatchedUsers();
+        ICollection<ExternalInfoUser> GetMatchedUsers();
     }
 }

@@ -7,7 +7,7 @@ namespace Data_Access_Layer
 {
     public interface IDAO
     {
-        bool Create(User user);
-        bool Update(User user);
+        bool Create(InternalInfoUser user);
+        bool Update(InternalInfoUser user);
     }
 }
