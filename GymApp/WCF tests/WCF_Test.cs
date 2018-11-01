@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GymAppService;
 using Model_Layer;
 using Data_Access_Layer;
-
+using Moq;
 namespace WCF_tests
 {
     [TestClass]

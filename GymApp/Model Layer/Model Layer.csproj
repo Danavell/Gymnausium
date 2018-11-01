@@ -5,8 +5,4 @@
     <RootNamespace>Model_Layer</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Unity.Wcf" Version="4.0.0" />
-  </ItemGroup>
-
 </Project>
