@@ -7,6 +7,7 @@ namespace Model_Layer
     public class User
     {
         [DataMember] public Guid User_Guid { get; set; }
+        [DataMember] public string Password { get; set; }
         [DataMember] public bool Account_Active { get; set; }
         [DataMember] public string Email { get; set; }
         [DataMember] public string First_Name { get; set; }
