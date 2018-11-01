@@ -9,7 +9,7 @@ namespace Model_Layer
     [KnownType(typeof(ExternalInfoUser))]
 
     /*User is the base type inherited by both Internal and External User Info.
-     * InternalInfoUser will be used to input a new user's info
+     * InternalInfoUser will be used to input a new user's info or to update it
      * ExternalInfoUser won't expose a User's email address, password or last name to other users
      * ExternalInfoUser will therefore be used when providing a list of mathcing Users.
      */
