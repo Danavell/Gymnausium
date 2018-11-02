@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using XamarinClient;
+using Model_Layer;
 
 namespace App2
 {
