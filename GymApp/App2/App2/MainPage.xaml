@@ -4,24 +4,16 @@
              xmlns:local="clr-namespace:App2"
              x:Class="App2.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
+    <StackLayout VerticalOptions="CenterAndExpand" Padding="30">
+        <Label Text="Login" Font="30" HorizontalOptions="Center"/>
+        <Entry Placeholder="username" />
+        <Entry Placeholder="password" />
 
-        
-            <Label 
-            Text="Write a text in field under " 
-             x:Name="textFieldWrite"
-            HorizontalOptions="Center"
-                VerticalOptions="Start"
-               />
-        <Editor 
-            Text="Write here"
-            x:Name="editorWrite"
-            HorizontalOptions="Center"
-            />
-        <Label>
-            
-        </Label>
+        <Button
+            Text="Continue" 
+            Clicked="ButtonClicked"/>
+
+
     </StackLayout>
 
 </ContentPage>
