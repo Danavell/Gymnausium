@@ -79,8 +79,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data_Access_Layer\Data_Access_Layer.csproj">
-      <Project>{a964cdfc-33cd-4c2f-a0da-6a76efeb235a}</Project>
+    <ProjectReference Include="..\Data Access Layer\Data_Access_Layer.csproj">
+      <Project>{77aad16a-7b01-483e-b677-acb7b0e3b7e9}</Project>
       <Name>Data_Access_Layer</Name>
     </ProjectReference>
     <ProjectReference Include="..\GymApp\GymAppService.csproj">
