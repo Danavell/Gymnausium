@@ -10,7 +10,7 @@ namespace Data_Access_Layer.shared
     {
         private readonly IDbCommand _cmd;
 
-        private readonly TransactionContext _suppliedTranscationContext;
+        private readonly TransactionContext _suppliedTransactionContext;
 
         public DBCommand(string commandString)
         {
@@ -20,7 +20,7 @@ namespace Data_Access_Layer.shared
 
         public DBCommand(string commandString, TransactionContext transactionContext) : this(commandString)
         {
-            this._suppliedTranscationContext = transactionContext;
+            this._suppliedTransactionContext = transactionContext;
         }
 
         public void AddQueryParamters(string[,] paramKeyValPairs)
@@ -62,10 +62,15 @@ namespace Data_Access_Layer.shared
 
             var rowsAffectedCount = this._cmd.ExecuteNonQuery();
 
-            if (this._suppliedTranscationContext == null)
+            if (this._suppliedTransactionContext == null)
                 context.Commit();
 
             return rowsAffectedCount;
+        }
+
+        public int ExecuteScalar()
+        {
+            return 0;
         }
 
         public void ExecuteReaderWithRowAction(Action<IDataReader> rowReadAction)
@@ -91,14 +96,14 @@ namespace Data_Access_Layer.shared
             {
                 rdr?.Close();
 
-                if (this._suppliedTranscationContext == null)
+                if (this._suppliedTransactionContext == null)
                     context.Commit();
             }
         }
 
         private TransactionContext ResolveContext()
         {
-            var context = this._suppliedTranscationContext ?? TransactionContext.New();
+            var context = this._suppliedTransactionContext ?? TransactionContext.New();
             this._cmd.Connection = context.Connection;
             this._cmd.Transaction = context.Transaction;
 
