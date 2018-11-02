@@ -6,8 +6,8 @@
 
     <StackLayout VerticalOptions="CenterAndExpand" Padding="30">
         <Label Text="Login" Font="30" HorizontalOptions="Center"/>
-        <Entry Placeholder="username" />
-        <Entry Placeholder="password" />
+        <Entry x:Name="username" Placeholder="username"/>
+        <Entry x:Name="password" Placeholder="password" IsPassword="True" Completed="ButtonClicked"/>
 
         <Button
             Text="Continue" 

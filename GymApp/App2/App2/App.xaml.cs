@@ -1,7 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Model_Layer;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace App2
