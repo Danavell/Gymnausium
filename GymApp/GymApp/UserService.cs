@@ -11,11 +11,6 @@ namespace GymAppService
 {
     public class UserService : IUserService
     {
-        private readonly IDAO _idao;
-        public UserService(IDAO dao)
-        {
-            this._idao = dao;
-        }
         public bool BlockUser(ExternalInfoUser user)
         {
             throw new NotImplementedException();

@@ -12,17 +12,11 @@ namespace WCF_tests
         [TestMethod]
         public void CreateTest()
         {
-            MockDAO mock = new MockDAO();
-            UserService us = new UserService(mock);
-            Assert.IsTrue(us.Create(new InternalInfoUser(new Guid(), "a@hotmail.com", "wow", "a", "b", 100, "jhjjkhk", "ghjhg")));
         }
 
         [TestMethod]
         public void UpdateTest()
         {
-            MockDAO mock = new MockDAO();
-            UserService us = new UserService(mock);
-            Assert.IsTrue(us.Create(new InternalInfoUser(new Guid(), "a@hotmail.com", "wow", "a", "b", 100, "jhjjkhk", "ghjhg")));
         }
     }
 
