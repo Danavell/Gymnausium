@@ -6,32 +6,39 @@ using System.ServiceModel;
 using System.Text;
 using Model_Layer;
 using Data_Access_Layer;
+using System.Threading.Tasks;
 
 namespace GymAppService
 {
     public class UserService : IUserService
     {
-        public bool BlockUser(ExternalInfoUser user)
+        IUserDAO _dao;   
+        public UserService() { }
+        public UserService(IUserDAO dao) { this._dao = dao; }
+        
+        public async Task<bool> Create(InternalInfoUser user)
+        {
+            bool outcome = await Task.Run(() =>_dao.Create(user));
+            return outcome;
+        }
+
+        public async Task<bool> Disable(ExternalInfoUser user)
         {
             throw new NotImplementedException();
         }
 
-        public bool Create(InternalInfoUser user)
+        public Task<ICollection<ExternalInfoUser>> GetMatchedUsers()
         {
             throw new NotImplementedException();
         }
 
-        public bool Disable(ExternalInfoUser user)
+        public async Task<bool> Update(InternalInfoUser user)
         {
-            throw new NotImplementedException();
+            bool outcome = await Task.Run(() => _dao.Update(user));
+            return outcome;
         }
 
-        public ICollection<ExternalInfoUser> GetMatchedUsers()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(InternalInfoUser user)
+        public Task<bool> BlockUser(ExternalInfoUser user)
         {
             throw new NotImplementedException();
         }

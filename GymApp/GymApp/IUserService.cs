@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Threading.Tasks;
 using Model_Layer;
 
 namespace GymAppService
@@ -13,18 +14,18 @@ namespace GymAppService
     public interface IUserService
     {
         [OperationContract]
-        bool Create(InternalInfoUser user);
+        Task<bool> Create(InternalInfoUser user);
 
         [OperationContract]
-        bool Update(InternalInfoUser user);
+        Task<bool> Update(InternalInfoUser user);
 
         [OperationContract]
-        bool Disable(ExternalInfoUser user);
+        Task<bool> Disable(ExternalInfoUser user);
 
         [OperationContract]
-        bool BlockUser(ExternalInfoUser user);
+        Task<bool> BlockUser(ExternalInfoUser user);
 
         [OperationContract]
-        ICollection<ExternalInfoUser> GetMatchedUsers();
+        Task<ICollection<ExternalInfoUser>> GetMatchedUsers();
     }
 }

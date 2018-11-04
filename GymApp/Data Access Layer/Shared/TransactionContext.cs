@@ -19,7 +19,7 @@ namespace Data_Access_Layer.Shared
         public IDbConnection Connection { get; private set; }
         public IDbTransaction Transaction { get; private set; }
 
-        public static TransactionContext New(IsolationLevel isolationLevel = IsolationLevel.Serializable)
+        public static TransactionContext New(IsolationLevel isolationLevel = IsolationLevel.ReadUncommitted)
         {
             return new TransactionContext(isolationLevel);
         }
@@ -36,5 +36,4 @@ namespace Data_Access_Layer.Shared
             this.Connection.Close();
         }
     }
-
 }
