@@ -13,7 +13,7 @@ namespace Data_Access_Layer.Repositories
 {
     class UserRepository : IUserDAO
     { 
-        public bool AddUser(InternalInfoUser user)
+        private bool AddUser(InternalInfoUser user)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace Data_Access_Layer.Repositories
             }
         }
 
-        public bool UpdateUser(InternalInfoUser user)
+        private bool UpdateUser(InternalInfoUser user)
         {
             try
             {
