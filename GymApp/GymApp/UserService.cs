@@ -13,7 +13,10 @@ namespace GymAppService
     public class UserService : IUserService
     {
         IUserDAO _dao;   
-        public UserService(IUserDAO dao) { this._dao = dao; }
+        public UserService(IUserDAO dao)
+        {
+            this._dao = dao;
+        }
         
         public async Task<bool> Create(InternalInfoUser user)
         {
