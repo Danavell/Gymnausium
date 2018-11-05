@@ -18,8 +18,7 @@ namespace GymAppService
         
         public async Task<bool> Create(InternalInfoUser user)
         {
-            bool outcome = await Task.Run(() =>_dao.Create(user));
-            return outcome;
+            return await Task.Run(() =>_dao.Create(user));
         }
 
         public async Task<bool> Disable(ExternalInfoUser user)
@@ -34,8 +33,7 @@ namespace GymAppService
 
         public async Task<bool> Update(InternalInfoUser user)
         {
-            bool outcome = await Task.Run(() => _dao.Update(user));
-            return outcome;
+            return await Task.Run(() => _dao.Update(user));
         }
 
         public Task<bool> BlockUser(ExternalInfoUser user)

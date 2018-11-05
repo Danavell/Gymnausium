@@ -16,7 +16,7 @@ namespace Data_Access_Layer.Shared
             get
             {
                 IDbConnection con = ComponentProvider.CreateConnection();
-                con.ConnectionString = ConfigurationManager.ConnectionStrings["contacts"].ConnectionString;
+                con.ConnectionString = ConfigurationManager.ConnectionStrings["sql"].ConnectionString;
 
                 return con;
             }

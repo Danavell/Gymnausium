@@ -11,42 +11,67 @@ using System.Threading.Tasks;
 
 namespace Data_Access_Layer.Repositories
 {
-    class UserRepository
+    class UserRepository : IUserDAO
     { 
-        public void CreateNewUser(InternalInfoUser user)
+        public bool AddUser(InternalInfoUser user)
         {
-            var command = new DBCommand("INSERT INTO [User] " +
-                                        "(Guid, Email, Password, Fname, Lname, Age, location, descr) " +
-                                        "VALUES (@Guid, @Email, @Password, @Fname, @Lname, @Age, @Location, @Descr)");
+            try
+            {
+                var command = new DBCommand("INSERT INTO [User] " +
+                                            "(Guid, Email, Password, Fname, Lname, Age, location, descr) " +
+                                            "VALUES (@Guid, @Email, @Password, @Fname, @Lname, @Age, @Location, @Descr)");
 
-            command.AddQueryParamters("@Email", user.User_Guid);
-            command.AddQueryParamters("@Email", user.Email);
-            command.AddQueryParamters("@Password", user.Password);
-            command.AddQueryParamters("@Fname", user.First_Name);
-            command.AddQueryParamters("@Lname", user.Last_Name);
-            command.AddQueryParamters("@Age", user.Age);
-            command.AddQueryParamters("@Location", user.Location_Data);
-            command.AddQueryParamters("@descr", user.Description);
-                
-            command.ExecuteNoneQuery();
+                command.AddQueryParamters("@Email", user.User_Guid);
+                command.AddQueryParamters("@Email", user.Email);
+                command.AddQueryParamters("@Password", user.Password);
+                command.AddQueryParamters("@Fname", user.First_Name);
+                command.AddQueryParamters("@Lname", user.Last_Name);
+                command.AddQueryParamters("@Age", user.Age);
+                command.AddQueryParamters("@Location", user.Location_Data);
+                command.AddQueryParamters("@descr", user.Description);
+
+                return command.ExecuteBoolQuery();
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
-        public void UpdateUser(InternalInfoUser user)
+        public bool UpdateUser(InternalInfoUser user)
         {
-            var command = new DBCommand("UPDATE [User] " +
-                                        "SET Email = @Email, Password = @Password, Fname = @Fname, Lname = @Lname, Age = @Lname, location = @Location, descr = @descr) " +
-                                        "WHERE Guid = @Guid)");
+            try
+            {
+                var command = new DBCommand("UPDATE [User] " +
+                                            "SET Email = @Email, Password = @Password, Fname = @Fname, Lname = @Lname, Age = @Lname, location = @Location, descr = @descr) " +
+                                            "WHERE Guid = @Guid)");
 
-            command.AddQueryParamters("@Email", user.User_Guid);
-            command.AddQueryParamters("@Email", user.Email);
-            command.AddQueryParamters("@Password", user.Password);
-            command.AddQueryParamters("@Fname", user.First_Name);
-            command.AddQueryParamters("@Lname", user.Last_Name);
-            command.AddQueryParamters("@Age", user.Age);
-            command.AddQueryParamters("@Location", user.Location_Data);
-            command.AddQueryParamters("@descr", user.Description);
+                command.AddQueryParamters("@Email", user.User_Guid);
+                command.AddQueryParamters("@Email", user.Email);
+                command.AddQueryParamters("@Password", user.Password);
+                command.AddQueryParamters("@Fname", user.First_Name);
+                command.AddQueryParamters("@Lname", user.Last_Name);
+                command.AddQueryParamters("@Age", user.Age);
+                command.AddQueryParamters("@Location", user.Location_Data);
+                command.AddQueryParamters("@descr", user.Description);
 
-            command.ExecuteNoneQuery();
+                return command.ExecuteBoolQuery();
+            }
+            catch
+            {
+                return false;
+            }
         }
+
+        public async Task<bool> Create(InternalInfoUser user)
+        {
+            return await Task.Run(() => AddUser(user));
+        }
+
+        public async Task<bool> Update(InternalInfoUser user)
+        {
+            return await Task.Run(() => UpdateUser(user));
+        }
+
     }
 }

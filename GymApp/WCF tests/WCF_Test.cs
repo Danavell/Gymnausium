@@ -32,7 +32,7 @@ namespace WCF_tests
         }
     }
 
-    public class MockDAO :IUserDAO
+    public class MockDAO : IUserDAO
     {
         public Task<bool> Create(InternalInfoUser user)
         {

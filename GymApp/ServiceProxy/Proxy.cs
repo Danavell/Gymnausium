@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model_Layer;
@@ -17,8 +16,7 @@ namespace ServiceProxy
 
         public async Task<bool> Create(InternalInfoUser user)
         {
-            IUserService userService = new UserServiceClient();
-            return await Task.Run(() => userService.Create(user));
+            return await Task.Run(() => new UserServiceClient().Create(user));
         }
 
         public Task<bool> Disable(ExternalInfoUser user)
@@ -33,8 +31,7 @@ namespace ServiceProxy
 
         public async Task<bool> Update(InternalInfoUser user)
         {
-            IUserService userService = new UserServiceClient();
-            return await Task.Run(() => userService.Update(user));
+            return await Task.Run(() => new UserServiceClient().Update(user));
         }
     }
 }

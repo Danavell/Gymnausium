@@ -56,16 +56,21 @@ namespace Data_Access_Layer.shared
             _cmd.Parameters.Add(param);
         }
 
-        public int ExecuteNoneQuery()
+        public bool ExecuteBoolQuery()
         {
             var context = this.ResolveContext();
+            try
+            {
+                var rowsAffectedCount = this._cmd.ExecuteNonQuery();
 
-            var rowsAffectedCount = this._cmd.ExecuteNonQuery();
-
-            if (this._suppliedTransactionContext == null)
-                context.Commit();
-
-            return rowsAffectedCount;
+                if (this._suppliedTransactionContext == null)
+                    context.Commit();
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
         }
 
         public int ExecuteScalar()

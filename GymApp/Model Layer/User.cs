@@ -19,13 +19,12 @@ namespace Model_Layer
         [DataMember] public Guid User_Guid { get; set; }
         [DataMember] public string First_Name { get; set; }
         [DataMember] public int Age { get; set; }
-        [DataMember] public string Location_Data { get; set; }
         [DataMember] public string Description { get; set; }
 
         public User() { }
-        public User(Guid user_guid, string fname, int age, string loc, string desc)
+        public User(Guid user_guid, string fname, int age, string desc)
         {
-            User_Guid = user_guid; First_Name = fname; Age = age; Location_Data = loc; Description = desc;
+            User_Guid = user_guid; First_Name = fname; Age = age; Description = desc;
         }
     }
 
@@ -37,7 +36,7 @@ namespace Model_Layer
         [DataMember] public string Last_Name { get; set; }
 
         public InternalInfoUser() { }
-        public InternalInfoUser(Guid user_guid, string email, string password, string fname, string lname, int age, string loc, string desc) : base(user_guid, fname, age, loc, desc)
+        public InternalInfoUser(Guid user_guid, string email, string password, string fname, string lname, int age, string desc) : base(user_guid, fname, age, desc)
         {
             Email = email; Password = password; Last_Name = lname;
         }
@@ -49,7 +48,7 @@ namespace Model_Layer
         [DataMember] public bool Account_Active { get; set; }
         [DataMember] public DateTime Last_Login { get; set; }
         public ExternalInfoUser() { }
-        public ExternalInfoUser(bool acc, DateTime lastlog, Guid user_guid, string fname, int age, string loc, string desc) : base(user_guid, fname, age, loc, desc)
+        public ExternalInfoUser(bool acc, DateTime lastlog, Guid user_guid, string fname, int age, string desc) : base(user_guid, fname, age, desc)
         {
             Account_Active = acc; Last_Login = lastlog;
         }
