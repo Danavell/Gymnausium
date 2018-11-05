@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Data_Access_Layer.Repositories
 {
-    class UserRepository : IUserDAO
+    class UserDAO : IUserDAO
     { 
         private bool AddUser(InternalInfoUser user)
         {
