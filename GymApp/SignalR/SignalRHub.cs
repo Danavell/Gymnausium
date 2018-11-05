@@ -12,9 +12,8 @@ namespace SignalR
     public class SignalRHub : Hub
     {
         IProxy _proxy;
-        public SignalRHub(IProxy proxy)
-        {
-            this._proxy = proxy;
+        public SignalRHub()
+        {            
         }
         public void Hello()
         {
