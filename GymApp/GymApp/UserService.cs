@@ -13,7 +13,6 @@ namespace GymAppService
     public class UserService : IUserService
     {
         IUserDAO _dao;   
-        public UserService() { }
         public UserService(IUserDAO dao) { this._dao = dao; }
         
         public async Task<bool> Create(InternalInfoUser user)
@@ -39,6 +38,18 @@ namespace GymAppService
         public Task<bool> BlockUser(ExternalInfoUser user)
         {
             throw new NotImplementedException();
+        }
+    }
+    public class MockDAO : IUserDAO
+    {
+        public Task<bool> Create(InternalInfoUser user)
+        {
+            return Task.Run(() => user.Password == "password");
+        }
+
+        public Task<bool> Update(InternalInfoUser user)
+        {
+            return Task.Run(() => user.Password == "password");
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Data_Access_Layer.Repositories
             {
                 var command = new DBCommand("INSERT INTO [User] " +
                                             "(Guid, Email, Password, Fname, Lname, Age, location, descr) " +
-                                            "VALUES (@Guid, @Email, @Password, @Fname, @Lname, @Age, @Location, @Descr)");
+                                            "VALUES (@Guid, @Email, @Password, @Fname, @Lname, @Age, @Descr)");
 
                 command.AddQueryParamters("@Email", user.User_Guid);
                 command.AddQueryParamters("@Email", user.Email);
@@ -27,7 +27,6 @@ namespace Data_Access_Layer.Repositories
                 command.AddQueryParamters("@Fname", user.First_Name);
                 command.AddQueryParamters("@Lname", user.Last_Name);
                 command.AddQueryParamters("@Age", user.Age);
-                command.AddQueryParamters("@Location", user.Location_Data);
                 command.AddQueryParamters("@descr", user.Description);
 
                 return command.ExecuteBoolQuery();
@@ -43,7 +42,7 @@ namespace Data_Access_Layer.Repositories
             try
             {
                 var command = new DBCommand("UPDATE [User] " +
-                                            "SET Email = @Email, Password = @Password, Fname = @Fname, Lname = @Lname, Age = @Lname, location = @Location, descr = @descr) " +
+                                            "SET Email = @Email, Password = @Password, Fname = @Fname, Lname = @Lname, Age = @Lname, descr = @descr) " +
                                             "WHERE Guid = @Guid)");
 
                 command.AddQueryParamters("@Email", user.User_Guid);
@@ -52,7 +51,6 @@ namespace Data_Access_Layer.Repositories
                 command.AddQueryParamters("@Fname", user.First_Name);
                 command.AddQueryParamters("@Lname", user.Last_Name);
                 command.AddQueryParamters("@Age", user.Age);
-                command.AddQueryParamters("@Location", user.Location_Data);
                 command.AddQueryParamters("@descr", user.Description);
 
                 return command.ExecuteBoolQuery();
