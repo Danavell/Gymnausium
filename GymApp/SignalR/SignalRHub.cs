@@ -4,14 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.SignalR;
-using ServiceProxy;
 using Model_Layer;
 
 namespace SignalR
 {
     public class SignalRHub : Hub
     {
-        IProxy _proxy;
         public SignalRHub()
         {            
         }
