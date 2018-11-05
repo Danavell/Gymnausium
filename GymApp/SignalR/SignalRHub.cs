@@ -21,9 +21,9 @@ namespace SignalR
             Clients.All.hello();
         }
 
-        public bool Create(Guid user_guid, string email, string password, string fname, string lname, int age, string desc)
+        public bool Create(Guid user_guid, int gender, int weight, string email, string password, string fname, string lname, int age, string desc, bool disabled)
         {
-            Task<bool> outcome = _proxy.Create(new InternalInfoUser(user_guid, email, password, fname, lname, age, desc));
+            Task<bool> outcome = _proxy.Create(new InternalInfoUser(user_guid, gender, weight, email, password, fname, lname, age, desc, disabled));
             return outcome.Result;
         }
     }

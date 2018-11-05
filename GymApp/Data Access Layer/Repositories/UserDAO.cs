@@ -18,15 +18,16 @@ namespace Data_Access_Layer.Repositories
             try
             {
                 var command = new DBCommand("INSERT INTO [User] " +
-                                            "(Guid, Email, Password, Fname, Lname, Age, location, descr) " +
-                                            "VALUES (@Guid, @Email, @Password, @Fname, @Lname, @Age, @Descr)");
+                                            "(ID, email, psswrd, first_name, last_name, age, descrption, dsbld) " +
+                                            "VALUES (@Guid, @Email, @Password, @Fname, @Lname, @Age, @Descr, @Disabled)");
 
-                command.AddQueryParamters("@Email", user.User_Guid);
+                command.AddQueryParamters("@Guid", user.User_Guid);
                 command.AddQueryParamters("@Email", user.Email);
                 command.AddQueryParamters("@Password", user.Password);
                 command.AddQueryParamters("@Fname", user.First_Name);
                 command.AddQueryParamters("@Lname", user.Last_Name);
                 command.AddQueryParamters("@Age", user.Age);
+                command.AddQueryParamters("@descr", user.Description);
                 command.AddQueryParamters("@descr", user.Description);
 
                 return command.ExecuteBoolQuery();
