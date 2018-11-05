@@ -24,7 +24,9 @@ namespace Model_Layer
         public User() { }
         public User(Guid user_guid, string fname, int age, string desc)
         {
-            User_Guid = user_guid; First_Name = fname; Age = age; Description = desc;
+            User_Guid = user_guid;
+            First_Name = fname;
+            Age = age; Description = desc;
         }
     }
 
@@ -38,7 +40,9 @@ namespace Model_Layer
         public InternalInfoUser() { }
         public InternalInfoUser(Guid user_guid, string email, string password, string fname, string lname, int age, string desc) : base(user_guid, fname, age, desc)
         {
-            Email = email; Password = password; Last_Name = lname;
+            Email = email;
+            Password = password;
+            Last_Name = lname;
         }
     }
 
