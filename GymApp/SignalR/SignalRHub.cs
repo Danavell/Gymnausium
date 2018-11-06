@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using Microsoft.AspNet.SignalR;
 using Model_Layer;
+using SignalR.ServiceReference;
 
 namespace SignalR
 {
@@ -20,8 +21,9 @@ namespace SignalR
 
         public bool Create(Guid user_guid, int gender, int weight, string email, string password, string fname, string lname, int age, string desc, bool disabled)
         {
-            Task<bool> outcome = _proxy.Create(new InternalInfoUser(user_guid, gender, weight, email, password, fname, lname, age, desc, disabled));
-            return outcome.Result;
+            //Task<bool> outcome = new InternalInfoUser(user_guid, gender, weight, email, password, fname, lname, age, desc, disabled));
+            //return outcome.Result;
+            return true;
         }
     }
 }

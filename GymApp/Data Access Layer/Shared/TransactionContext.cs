@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
-using System.Data;
 using System.Threading.Tasks;
 
 namespace Data_Access_Layer.Shared
@@ -19,7 +19,7 @@ namespace Data_Access_Layer.Shared
         public IDbConnection Connection { get; private set; }
         public IDbTransaction Transaction { get; private set; }
 
-        public static TransactionContext New(IsolationLevel isolationLevel = IsolationLevel.ReadUncommitted)
+        public static TransactionContext New(IsolationLevel isolationLevel = IsolationLevel.Serializable)
         {
             return new TransactionContext(isolationLevel);
         }

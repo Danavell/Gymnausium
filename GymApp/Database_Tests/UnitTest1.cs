@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Model_Layer;
 using Data_Access_Layer;
 using Data_Access_Layer.Repositories;
+using System.Threading.Tasks;
 
 namespace Database_Tests
 {
@@ -10,11 +11,18 @@ namespace Database_Tests
     public class Database_Tests
     {
         [TestMethod]
-        public void Create_User_Test()
+        public void Create_User_Test() { 
+        
+            bool x = Outcome();
+            Assert.IsTrue(x);
+        }
+
+        public bool Outcome()
         {
-            InternalInfoUser iiu = new InternalInfoUser(new Guid(), 0, 100, "email", "password", "fname", "lname", 100, "desc", false);
-            IUserDAO userDAO = new UserDAO();
-            Console.WriteLine(userDAO.Create(iiu));
+            UserDAO userDAO = new UserDAO();
+            Guid g = Guid.NewGuid();
+
+            return userDAO.Create(new InternalInfoUser(g, 0, 100, "email", "password", "fname", "lname", 100, "desc", false));
         }
     }
 }

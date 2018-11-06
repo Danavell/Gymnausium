@@ -1,12 +1,6 @@
-﻿using Data_Access_Layer.shared;
-using Data_Access_Layer.Shared;
+﻿using Data_Access_Layer.Shared;
 using Model_Layer;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Data_Access_Layer.Repositories
@@ -17,36 +11,39 @@ namespace Data_Access_Layer.Repositories
         {
             try
             {
-                var command = new DBCommand("INSERT INTO [User] " +
-                                            "(ID, email, psswrd, first_name, last_name, age, descrption, dsbld) " +
-                                            "VALUES (@Guid, @Email, @Password, @Fname, @Lname, @Age, @Descr, @Disabled)");
+                DBCommand command = new DBCommand("INSERT INTO [user] (ID, gender, weght, email, psswrd, first_name, last_name, age, descrption, dsbld) VALUES (@Guid, @Gender, @Weight, @Email, @Password, @Fname, @Lname, @Age, @Descr, @Disabled)");
 
                 command.AddQueryParamters("@Guid", user.User_Guid);
+                command.AddQueryParamters("@Gender", user.Gender);
+                command.AddQueryParamters("@Weight", user.Weight);
                 command.AddQueryParamters("@Email", user.Email);
                 command.AddQueryParamters("@Password", user.Password);
                 command.AddQueryParamters("@Fname", user.First_Name);
                 command.AddQueryParamters("@Lname", user.Last_Name);
                 command.AddQueryParamters("@Age", user.Age);
-                command.AddQueryParamters("@descr", user.Description);
-                command.AddQueryParamters("@descr", user.Description);
+                command.AddQueryParamters("@Descr", user.Description);
+                command.AddQueryParamters("@Disabled", 1);
 
-                return command.ExecuteBoolQuery();
+                command.ExecuteNoneQuery();
+                return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return false;
             }
         }
 
         private bool UpdateUser(InternalInfoUser user)
         {
+            DBCommand command = null;
             try
             {
-                var command = new DBCommand("UPDATE [User] " +
+                command = new DBCommand("UPDATE [User] " +
                                             "SET Email = @Email, Password = @Password, Fname = @Fname, Lname = @Lname, Age = @Lname, descr = @descr) " +
                                             "WHERE Guid = @Guid)");
 
-                command.AddQueryParamters("@Email", user.User_Guid);
+                command.AddQueryParamters("@E", user.User_Guid);
                 command.AddQueryParamters("@Email", user.Email);
                 command.AddQueryParamters("@Password", user.Password);
                 command.AddQueryParamters("@Fname", user.First_Name);
@@ -54,7 +51,8 @@ namespace Data_Access_Layer.Repositories
                 command.AddQueryParamters("@Age", user.Age);
                 command.AddQueryParamters("@descr", user.Description);
 
-                return command.ExecuteBoolQuery();
+                command.ExecuteNoneQuery();
+                return true;
             }
             catch
             {
@@ -62,15 +60,19 @@ namespace Data_Access_Layer.Repositories
             }
         }
 
-        public async Task<bool> Create(InternalInfoUser user)
+        public bool Create(InternalInfoUser user)
         {
-            return await Task.Run(() => AddUser(user));
+            return AddUser(user);
         }
 
         public async Task<bool> Update(InternalInfoUser user)
         {
-            return await Task.Run(() => UpdateUser(user));
+            return await Task.FromResult(UpdateUser(user));
         }
 
+        Task<bool> IUserDAO.Create(InternalInfoUser user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

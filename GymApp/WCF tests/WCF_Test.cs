@@ -17,8 +17,8 @@ namespace WCF_tests
             MockDAO mock = new MockDAO();
             UserService userservice = new UserService(mock);
             InternalInfoUser iiu = new InternalInfoUser(new Guid(), 0, 100, "email@email.com", "password", "fname", "lname", 100, "desc", false);
-            await userservice.Create(iiu);
-            Assert.IsTrue(iiu.First_Name.Equals("fname"));
+            bool x = await userservice.Create(iiu);
+            Assert.IsTrue(x);
         }
 
         [TestMethod]
@@ -27,8 +27,8 @@ namespace WCF_tests
             MockDAO mock = new MockDAO();
             UserService userservice = new UserService(mock);
             InternalInfoUser iiu = new InternalInfoUser(new Guid(), 0, 100, "email@email.com", "password", "fname", "lname", 100, "desc", false);
-            await userservice.Update(iiu);
-            Assert.IsTrue(iiu.First_Name.Equals("fname"));
+            bool x = await userservice.Update(iiu);
+            Assert.IsTrue(x);
         }
     }
 }
