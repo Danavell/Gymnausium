@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamarinClient;
@@ -14,9 +13,9 @@ namespace XamarinClient
 	public partial class Page2 : ContentPage
 	{
 		public Page2 (string username, string password)
-		{
-			Content = CreatePage(username,password);  //idk why but xaml code creates the UI instead of C#
-			InitializeComponent ();
+		{			
+			InitializeComponent();
+			Content = CreatePage(username, password);
 		}
 
 		private View CreatePage(string username, string password)
