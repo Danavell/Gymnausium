@@ -51,6 +51,11 @@ namespace GymAppService
             return Task.Run(() => user.Password == "password");
         }
 
+        public Task<bool> Login_Validation(string email, string password)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<bool> Update(InternalInfoUser user)
         {
             return Task.Run(() => user.Password == "password");

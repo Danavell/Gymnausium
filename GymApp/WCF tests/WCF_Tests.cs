@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace WCF_tests
 {
     [TestClass]
-    public class WCF_Test
+    public class WCF_Tests
     {
         [TestMethod]
         public async Task CreateTest()

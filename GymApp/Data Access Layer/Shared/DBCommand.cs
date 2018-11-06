@@ -43,6 +43,15 @@ namespace Data_Access_Layer.Shared
             _cmd.Parameters.Add(param);
         }
 
+        public void AddQueryParamters(string key, DateTime value)
+        {
+            IDataParameter param = DBComponentsFactory.ComponentProvider.CreateParameter();
+            param.ParameterName = key;
+            param.Value = value;
+            _cmd.Parameters.Add(param);
+        }
+
+
         public void AddQueryParamters(string key, string value)
         {
             IDataParameter param = DBComponentsFactory.ComponentProvider.CreateParameter();
@@ -68,6 +77,18 @@ namespace Data_Access_Layer.Shared
                 context.Commit();
 
             return rowsAffectedCount;
+        }
+
+        public object ExecuteScalar()
+        {
+            var context = this.ResolveContext();
+
+            var scalar = _cmd.ExecuteScalar();
+
+            if (this._suppliedTranscationContext == null)
+                context.Commit();
+
+            return scalar;
         }
 
         public void ExecuteReaderWithRowAction(Action<IDataReader> rowReadAction)
