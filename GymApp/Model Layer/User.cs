@@ -60,7 +60,8 @@ namespace Model_Layer
         public ExternalInfoUser() { }
         public ExternalInfoUser(bool acc, DateTime lastlog, int gender, int weight, Guid user_guid, string fname, int age, string desc, bool disabled) : base(user_guid, gender, weight, fname, age, desc, disabled)
         {
-            Account_Active = acc; Last_Login = lastlog;
+            Account_Active = acc;
+            Last_Login = lastlog;
         }
     }
 }

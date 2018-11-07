@@ -1,6 +1,7 @@
 ﻿using Data_Access_Layer.Shared;
 using Model_Layer;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 
@@ -8,6 +9,29 @@ namespace Data_Access_Layer.Repositories
 {
     public class UserDAO : IUserDAO
     { 
+        public (bool outcome, ICollection<ExternalInfoUser>) GetMatchedUsers(float latitude, float longitude, int search_distance)
+        {
+            var resultList = new HashSet<ExternalInfoUser>();
+
+            var command = new DBCommand("EXEC Find_Nearby_Matches @lat = @la, @long = @lo, @search = @srch");
+
+            command.AddQueryParamters("la", latitude);
+            command.AddQueryParamters("@lo", longitude);
+            command.AddQueryParamters("@Lname", search_distance);
+
+            command.ExecuteReaderWithRowAction((rdr) =>
+            {
+                resultList.Add(
+                    new Contact(
+                        id: int.Parse(rdr["ID"].ToString()),
+                        fname: rdr["Fname"] as string,
+                        lname: rdr["Lname"] as string,
+                        phone: rdr["Phone"] as string)
+                );
+            });
+            bool outcome = false;
+            return (outcome, resultList);
+        }
         private bool Check_Credentials(string email, string password)
         {
             DBCommand command = new DBCommand("EXEC dbo.Count_Login_Authentication @Email = @email, @Password = @password, @Bool = @bool");
@@ -100,6 +124,7 @@ namespace Data_Access_Layer.Repositories
             }
             catch
             {
+                transaction.Rollback();
                 return false;
             }
         }
