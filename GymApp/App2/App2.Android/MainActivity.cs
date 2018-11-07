@@ -26,6 +26,7 @@ namespace App2.Droid
         }
         // Field, property, and method for Picture Picker
         public static readonly int PickImageId = 1000;
+        internal static MainActivity Instance;
 
         public TaskCompletionSource<Stream> PickImageTaskCompletionSource { set; get; }
 

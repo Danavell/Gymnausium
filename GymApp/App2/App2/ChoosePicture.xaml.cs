@@ -15,11 +15,29 @@ namespace XamarinClient
         public ChoosePicture()
         {
             InitializeComponent();
+            Content = CreatePage();
         }
 
-        private void GetPicture(object sender, EventArgs e)
+        private View CreatePage()
         {
-            
+            var stack = new StackLayout()
+            {
+                Padding = 30
+            };
+
+            Button pickPictureButton = new Button
+            {
+                Text = "Pick Photo",
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                HorizontalOptions = LayoutOptions.CenterAndExpand
+            };
+
+            stack.Children.Add(pickPictureButton);
+
+        
+            return stack;
         }
+
+
     }
 }
