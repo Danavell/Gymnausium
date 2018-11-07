@@ -10,12 +10,11 @@ namespace Data_Access_Layer.Repositories
     { 
         private bool Check_Credentials(string email, string password)
         {
-            DBCommand command = new DBCommand("EXEC dbo.Login_Authentication @Email = @email, @Password = @password");
-
+            DBCommand command = new DBCommand("EXEC dbo.Count_Login_Authentication @Email = @email, @Password = @password, @Bool = @bool");
             command.AddQueryParamters("@email", email);
             command.AddQueryParamters("@password", password);
-
-            int result = command.ExecuteNoneQuery();
+            command.AddQueryParamters("@bool", 0);
+            int result = (int)command.ExecuteScalar();
             return Convert.ToBoolean(result);
         }
 
@@ -26,13 +25,14 @@ namespace Data_Access_Layer.Repositories
             try
             {
                 DBCommand command = new DBCommand("INSERT INTO [user] (" +
-                    "user_guid, first_name, last_name, gender, weigh, descrip) " +
-                    "VALUES (@Guid, @Fname, @Lname, @Gender, @Weight,@Descr)", transaction);
+                    "user_guid, first_name, last_name, gender, age, weigh, descrip) " +
+                    "VALUES (@Guid, @Fname, @Lname, @Gender, @Age, @Weight,@Descr)", transaction);
 
                 command.AddQueryParamters("@Guid", user.User_Guid);
                 command.AddQueryParamters("@Fname", user.First_Name);
                 command.AddQueryParamters("@Lname", user.Last_Name);
                 command.AddQueryParamters("@Gender", user.Gender);
+                command.AddQueryParamters("@Age", user.Age);
                 command.AddQueryParamters("@Weight", user.Weight);
                 command.AddQueryParamters("@Descr", user.Description);
 
@@ -69,7 +69,7 @@ namespace Data_Access_Layer.Repositories
             try
             {
                 DBCommand command = new DBCommand("UPDATE [User] " +
-                    "SET user_guid = @Guid, first_name = @Fname, last_name = @Lname, gender = @Gender, weigh = @Weight, descrip = @Description" +
+                    "SET user_guid = @Guid, first_name = @Fname, last_name = @Lname, gender = @Gender, age = @Age, weigh = @Weight, descrip = @Description" +
                     "WHERE Guid = @Guid)",
                     transaction);
 
@@ -77,8 +77,10 @@ namespace Data_Access_Layer.Repositories
                 command.AddQueryParamters("@Fname", user.First_Name);
                 command.AddQueryParamters("@Lname", user.Last_Name);
                 command.AddQueryParamters("@Gender", user.Gender);
+                command.AddQueryParamters("@Age", user.Age);
+                command.AddQueryParamters("@Age", user.Age);
                 command.AddQueryParamters("@Weight", user.Weight);
-                command.AddQueryParamters("@Description", user.Description);
+                command.AddQueryParamters("@Descr", user.Description);
 
                 command.ExecuteNoneQuery();
                 int active = user.Disabled ? 1 : 0;

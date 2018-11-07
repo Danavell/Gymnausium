@@ -19,6 +19,15 @@ namespace Data_Access_Layer.Shared
             _cmd.CommandText = commandString;
         }
 
+        public DBCommand(string stored_procedure, string commandString)
+        {
+            _cmd = DBComponentsFactory.ComponentProvider.CreateCommand();
+            _cmd.CommandType = CommandType.StoredProcedure;
+            _cmd.Parameters.Add("@bool");
+
+
+        }
+
         public DBCommand(string commandString, TransactionContext transactionContext) : this(commandString)
         {
             this._suppliedTranscationContext = transactionContext;

@@ -19,7 +19,7 @@ namespace Data_Access_Layer.Shared
             {
                 IDbConnection con = ComponentProvider.CreateConnection();
                 //con.ConnectionString = ConfigurationManager.ConnectionStrings["sql"].ConnectionString;
-                con.ConnectionString = "Data Source=kraka.ucn.dk; Initial Catalog=dmaj0917_1067666; User ID=dmaj0917_1067666; Password=Password1!;";
+                con.ConnectionString = "Data Source=kraka.ucn.dk; Initial Catalog=dmaj0917_1067332; User ID=dmaj0917_1067332; Password=Password1!;";
 
                 return con;
             }
