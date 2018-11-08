@@ -10,6 +10,6 @@ namespace Data_Access_Layer
     {
         Task<bool> Create(InternalInfoUser user);
         Task<bool> Update(InternalInfoUser user);
-        Task<bool> Login_Validation(string email, string password);
+        Task<bool?> Login_Validation(string email, string password);
     }
 }

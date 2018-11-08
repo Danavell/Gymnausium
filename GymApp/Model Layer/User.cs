@@ -20,48 +20,17 @@ namespace Model_Layer
         [DataMember] public string First_Name { get; set; }
         [DataMember] public int Age { get; set; }
         [DataMember] public string Description { get; set; }
-        [DataMember] public bool Disabled { get; set; }
         [DataMember] public int Weight { get; set; }
         [DataMember] public int Gender { get; set; }
         public User() { }
-        public User(Guid user_guid, int gender, int weight, string fname, int age, string desc, bool disabled)
+        public User(Guid user_guid, int gender, int weight, string fname, int age, string desc)
         {
             User_Guid = user_guid;
             First_Name = fname;
             Age = age;
             Description = desc;
-            Disabled = disabled;
             Gender = gender;
             Weight = weight;
-        }
-    }
-
-    [DataContract]
-    public class InternalInfoUser : User
-    {
-        [DataMember] public string Email { get; set; }
-        [DataMember] public string Password { get; set; }
-        [DataMember] public string Last_Name { get; set; }
-
-        public InternalInfoUser() { }
-        public InternalInfoUser(Guid user_guid, int gender, int weight, string email, string password, string fname, string lname, int age, string desc, bool disabled) : base(user_guid, gender, weight, fname, age, desc, disabled)
-        {
-            Email = email;
-            Password = password;
-            Last_Name = lname;
-        }
-    }
-
-    [DataContract]
-    public class ExternalInfoUser : User
-    {
-        [DataMember] public bool Account_Active { get; set; }
-        [DataMember] public DateTime Last_Login { get; set; }
-        public ExternalInfoUser() { }
-        public ExternalInfoUser(bool acc, DateTime lastlog, int gender, int weight, Guid user_guid, string fname, int age, string desc, bool disabled) : base(user_guid, gender, weight, fname, age, desc, disabled)
-        {
-            Account_Active = acc;
-            Last_Login = lastlog;
         }
     }
 }

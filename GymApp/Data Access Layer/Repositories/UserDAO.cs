@@ -22,24 +22,45 @@ namespace Data_Access_Layer.Repositories
             command.ExecuteReaderWithRowAction((rdr) =>
             {
                 resultList.Add(
-                    new Contact(
-                        id: int.Parse(rdr["ID"].ToString()),
-                        fname: rdr["Fname"] as string,
-                        lname: rdr["Lname"] as string,
-                        phone: rdr["Phone"] as string)
+                    new ExternalInfoUser(
+                        user_guid: int.Parse(rdr["ID"].ToString()),
+                        fname: rdr["Fname"] as string
                 );
             });
             bool outcome = false;
             return (outcome, resultList);
         }
-        private bool Check_Credentials(string email, string password)
+
+
+        private bool? Check_Credentials(string email, string password)
         {
-            DBCommand command = new DBCommand("EXEC dbo.Count_Login_Authentication @Email = @email, @Password = @password, @Bool = @bool");
+            var transaction = TransactionContext.New(IsolationLevel.Serializable);
+            try
+            {
+                DBCommand command = new DBCommand("EXEC dbo.Count_Login_Authentication @Email = @email, @Password = @password, @Bool = @bool", transaction);
+                command.AddQueryParamters("@email", email);
+                command.AddQueryParamters("@password", password);
+                command.AddQueryParamters("@bool", 0);
+                int result = (int)command.ExecuteScalar();
+
+                Change_Last_Login_Date(email, transaction);
+
+                transaction.Commit();
+
+                return Convert.ToBoolean(result);
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
+                return null;
+            }
+        }
+
+        private void Change_Last_Login_Date(string email, TransactionContext transaction)
+        {
+            DBCommand command = new DBCommand("UPDATE [User_Account_Info] SET last_login = GETUTCDATE() WHERE [User_Account_Info].email = @email", transaction);
             command.AddQueryParamters("@email", email);
-            command.AddQueryParamters("@password", password);
-            command.AddQueryParamters("@bool", 0);
-            int result = (int)command.ExecuteScalar();
-            return Convert.ToBoolean(result);
+            command.ExecuteNonQuery();
         }
 
         private bool AddUser(InternalInfoUser user)
@@ -50,7 +71,7 @@ namespace Data_Access_Layer.Repositories
             {
                 DBCommand command = new DBCommand("INSERT INTO [user] (" +
                     "user_guid, first_name, last_name, gender, age, weigh, descrip) " +
-                    "VALUES (@Guid, @Fname, @Lname, @Gender, @Age, @Weight,@Descr)", transaction);
+                    "VALUES (@Guid, @Fname, @Lname, @Gender, @Age, @Weight, @Descr)", transaction);
 
                 command.AddQueryParamters("@Guid", user.User_Guid);
                 command.AddQueryParamters("@Fname", user.First_Name);
@@ -60,8 +81,7 @@ namespace Data_Access_Layer.Repositories
                 command.AddQueryParamters("@Weight", user.Weight);
                 command.AddQueryParamters("@Descr", user.Description);
 
-                command.ExecuteNoneQuery();
-                int active = user.Disabled ? 1 : 0;
+                command.ExecuteNonQuery();
 
                 DBCommand second_command = new DBCommand("INSERT INTO [user_Account_Info] (" +
                     "email, password, last_login, account_active, user_guid) " +
@@ -71,10 +91,10 @@ namespace Data_Access_Layer.Repositories
                 second_command.AddQueryParamters("@Email", user.Email);
                 second_command.AddQueryParamters("@Password", user.Password);
                 second_command.AddQueryParamters("@Last_Login", DateTime.UtcNow);
-                second_command.AddQueryParamters("@Account_Active", active);
+                second_command.AddQueryParamters("@Account_Active", 1);
                 second_command.AddQueryParamters("@User_Guid", user.User_Guid);
 
-                second_command.ExecuteNoneQuery();
+                second_command.ExecuteNonQuery();
 
                 transaction.Commit();
                 return true;
@@ -106,8 +126,7 @@ namespace Data_Access_Layer.Repositories
                 command.AddQueryParamters("@Weight", user.Weight);
                 command.AddQueryParamters("@Descr", user.Description);
 
-                command.ExecuteNoneQuery();
-                int active = user.Disabled ? 1 : 0;
+                command.ExecuteNonQuery();
 
                 DBCommand second_command = new DBCommand("UPDATE [User] " +
                     "SET user_guid = email = @Email, password = @Password, last_login = @Last_Login, account_active = @Account_Active" +
@@ -117,7 +136,7 @@ namespace Data_Access_Layer.Repositories
                 second_command.AddQueryParamters("@Email", user.Email);
                 second_command.AddQueryParamters("@Password", user.Password);
                 second_command.AddQueryParamters("@Last_Login", DateTime.UtcNow);
-                second_command.AddQueryParamters("@Account_Active", active);
+                second_command.AddQueryParamters("@Account_Active", 1);
 
                 transaction.Commit();
                 return true;
@@ -139,7 +158,7 @@ namespace Data_Access_Layer.Repositories
             return await Task.FromResult(UpdateUser(user));
         }
 
-        public async Task<bool> Login_Validation(string email, string password)
+        public async Task<bool?> Login_Validation(string email, string password)
         {
             return await Task.FromResult(Check_Credentials(email, password));
         }

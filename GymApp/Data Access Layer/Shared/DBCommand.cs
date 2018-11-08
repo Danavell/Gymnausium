@@ -84,7 +84,7 @@ namespace Data_Access_Layer.Shared
             _cmd.Parameters.Add(param);
         }
 
-        public int ExecuteNoneQuery()
+        public int ExecuteNonQuery()
         {
             var context = this.ResolveContext();
 
