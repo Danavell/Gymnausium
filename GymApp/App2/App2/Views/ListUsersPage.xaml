@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinClient.Views.ListUsersPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView
+                ItemsSource="{Binding UserCollection}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ImageCell  
+                            Text="{Binding First_Name}"
+                            Detail="{Binding Age}"
+                            ImageSource="{Binding Description}"
+                            TextColor="Black"
+                            DetailColor="LightGray">
+                        </ImageCell>
+                                  
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
