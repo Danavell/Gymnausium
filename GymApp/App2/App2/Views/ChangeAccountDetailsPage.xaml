@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinClient.Views.ChangeAccountDetailsPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             Title="{Binding Title}"
+             ios:Page.UseSafeArea="True"
+             xmlns:behaviors="clr-namespace:XamarinClient.Behaviors">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="EntryStyle" TargetType="Entry">
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Fill"/>
+                <Setter Property="HeightRequest" Value="35"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                <Setter Property="FontSize" Value="Micro"/>
+                <Setter Property="WidthRequest" Value="200"/>
+            </Style>
+            <Style x:Key="EditorStyle" TargetType="Editor">
+                <Setter Property="Keyboard" Value="Chat"/>
+                <Setter Property="VerticalOptions" Value="Fill"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                <Setter Property="WidthRequest" Value="200"/>
+                <Setter Property="AutoSize" Value="TextChanges"/>
+                <Setter Property="FontSize" Value="Micro"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Spacing="5">
+                <Entry x:Name="Email" Keyboard="Email" Text="{Binding User.Email}" Style="{StaticResource EntryStyle}" Placeholder="Email address">
+                    <Entry.Behaviors>
+                        <behaviors:EmailValidationBehavior x:Name="EmailValidation" IsValid="True"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Entry x:Name="Email2" Keyboard="Email" Style="{StaticResource EntryStyle}" Placeholder="Re-type Email address">
+                    <Entry.Behaviors>
+                        <behaviors:CompareValidationBehavior x:Name="EmailCompareValidation" BindingContext="{x:Reference Email}" IsValid="True" Text="{Binding Text}"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Entry x:Name="OldPassword" Style="{StaticResource EntryStyle}" IsPassword="True" Placeholder="Old Password"/>
+                <Entry x:Name="Password" Style="{StaticResource EntryStyle}" IsPassword="True" Placeholder="New Password">
+                    <Entry.Behaviors>
+                        <behaviors:PasswordValidationBehavior IsValid="True" x:Name="PasswordValidation"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Entry x:Name="Password2" Style="{StaticResource EntryStyle}" IsPassword="True" Placeholder="Re-type Password">
+                    <Entry.Behaviors>
+                        <behaviors:CompareValidationBehavior x:Name="PasswordCompareValidation" BindingContext="{x:Reference Password}" IsValid="True" Text="{Binding Text}"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Editor x:Name="Description" Text="{Binding User.Description}" Style="{StaticResource EditorStyle}" Placeholder="Tell something about yourself"/>
+                <Entry x:Name="Weight" Text="{Binding User.Weight}" Keyboard="Numeric" Style="{StaticResource EntryStyle}" Placeholder="Weight">
+                    <Entry.Behaviors>
+                        <behaviors:NumberValidationBehavior x:Name="WeightValidation" IsValid="True"/>
+                    </Entry.Behaviors>
+                </Entry>
+                <Picker x:Name="Gender" SelectedItem="{Binding SelectedGender}" Title="Gender" ItemsSource="{Binding Genders}" FontSize="Micro" WidthRequest="200" HorizontalOptions="CenterAndExpand"/>
+                <Button x:Name="SaveButton" IsEnabled="False" HorizontalOptions="CenterAndExpand" Text="Save" Clicked="SaveButton_Clicked">
+                    <Button.Triggers>
+                        <MultiTrigger TargetType="Button">
+                            <MultiTrigger.Conditions>
+                                <BindingCondition Binding="{Binding Source={x:Reference EmailValidation}, Path=IsValid}" Value="True"/>
+                                <BindingCondition Binding="{Binding Source={x:Reference EmailCompareValidation}, Path=IsValid}" Value="True"/>
+                                <BindingCondition Binding="{Binding Source={x:Reference PasswordCompareValidation}, Path=IsValid}" Value="True"/>
+                                <BindingCondition Binding="{Binding Source={x:Reference PasswordValidation}, Path=IsValid}" Value="True"/>
+                                <BindingCondition Binding="{Binding Source={x:Reference WeightValidation}, Path=IsValid}" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiTrigger>
+                    </Button.Triggers>
+                </Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

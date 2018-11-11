@@ -16,6 +16,8 @@ namespace Model_Layer
 
     public abstract class User
     {
+        public enum Genders { Male, Female, Unspecified }
+
         [DataMember] public Guid User_Guid { get; set; }
         [DataMember] public string First_Name { get; set; }
         [DataMember] public int Age { get; set; }

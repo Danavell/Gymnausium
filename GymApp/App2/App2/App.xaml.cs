@@ -12,7 +12,7 @@ namespace App2
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new ListUsersPage());
+            MainPage = new ChangeAccountDetailsPage();
         }
 
         protected override void OnStart()
