@@ -6,20 +6,17 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XamarinClient.ViewModels;
 
-namespace XamarinClient
+namespace XamarinClient.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ChoosePicture : ContentPage
+    public partial class ListUsersPage : ContentPage
     {
-        public ChoosePicture()
+        public ListUsersPage()
         {
             InitializeComponent();
-        }
-
-        private void GetPicture(object sender, EventArgs e)
-        {
-            
+            BindingContext = new ListUsersViewModel();
         }
     }
 }

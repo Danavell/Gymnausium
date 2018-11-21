@@ -21,7 +21,7 @@ namespace GymAppService
         
         public async Task<bool> Create(InternalInfoUser user)
         {
-            return await Task.Run(() =>_dao.Create(user));
+            return await _dao.Create(user);
         }
 
         public async Task<bool> Disable(ExternalInfoUser user)
@@ -36,12 +36,17 @@ namespace GymAppService
 
         public async Task<bool> Update(InternalInfoUser user)
         {
-            return await Task.Run(() => _dao.Update(user));
+            return await _dao.Update(user);
         }
 
         public Task<bool> BlockUser(ExternalInfoUser user)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<bool?> Login_Validation(string email, string password)
+        {
+            return await _dao.Login_Validation(email, password);
         }
     }
     public class MockDAO : IUserDAO
@@ -49,6 +54,11 @@ namespace GymAppService
         public Task<bool> Create(InternalInfoUser user)
         {
             return Task.Run(() => user.Password == "password");
+        }
+
+        public Task<bool?> Login_Validation(string email, string password)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<bool> Update(InternalInfoUser user)

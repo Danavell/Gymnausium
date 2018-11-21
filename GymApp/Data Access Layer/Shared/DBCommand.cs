@@ -19,6 +19,15 @@ namespace Data_Access_Layer.Shared
             _cmd.CommandText = commandString;
         }
 
+        public DBCommand(string stored_procedure, string commandString)
+        {
+            _cmd = DBComponentsFactory.ComponentProvider.CreateCommand();
+            _cmd.CommandType = CommandType.StoredProcedure;
+            _cmd.Parameters.Add("@bool");
+
+
+        }
+
         public DBCommand(string commandString, TransactionContext transactionContext) : this(commandString)
         {
             this._suppliedTranscationContext = transactionContext;
@@ -35,6 +44,14 @@ namespace Data_Access_Layer.Shared
             }
         }
 
+        public void AddQueryParamters(string key, float value)
+        {
+            IDataParameter param = DBComponentsFactory.ComponentProvider.CreateParameter();
+            param.ParameterName = key;
+            param.Value = value;
+            _cmd.Parameters.Add(param);
+        }
+
         public void AddQueryParamters(string key, int value)
         {
             IDataParameter param = DBComponentsFactory.ComponentProvider.CreateParameter();
@@ -42,6 +59,15 @@ namespace Data_Access_Layer.Shared
             param.Value = value;
             _cmd.Parameters.Add(param);
         }
+
+        public void AddQueryParamters(string key, DateTime value)
+        {
+            IDataParameter param = DBComponentsFactory.ComponentProvider.CreateParameter();
+            param.ParameterName = key;
+            param.Value = value;
+            _cmd.Parameters.Add(param);
+        }
+
 
         public void AddQueryParamters(string key, string value)
         {
@@ -58,7 +84,7 @@ namespace Data_Access_Layer.Shared
             _cmd.Parameters.Add(param);
         }
 
-        public int ExecuteNoneQuery()
+        public int ExecuteNonQuery()
         {
             var context = this.ResolveContext();
 
@@ -68,6 +94,18 @@ namespace Data_Access_Layer.Shared
                 context.Commit();
 
             return rowsAffectedCount;
+        }
+
+        public object ExecuteScalar()
+        {
+            var context = this.ResolveContext();
+
+            var scalar = _cmd.ExecuteScalar();
+
+            if (this._suppliedTranscationContext == null)
+                context.Commit();
+
+            return scalar;
         }
 
         public void ExecuteReaderWithRowAction(Action<IDataReader> rowReadAction)

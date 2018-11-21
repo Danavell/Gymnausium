@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XamarinClient.Views;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace App2
@@ -11,7 +12,7 @@ namespace App2
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new ChangeAccountDetailsPage();
         }
 
         protected override void OnStart()
