@@ -4,11 +4,14 @@
              xmlns:local="clr-namespace:BestAppClient"
              x:Class="BestAppClient.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+    <StackLayout VerticalOptions="CenterAndExpand" Padding="30">
+        <Label Text="Login" Font="30" HorizontalOptions="Center"/>
+        <Entry x:Name="username" Placeholder="username"/>
+        <Entry x:Name="password" Placeholder="password" IsPassword="True" Completed="ButtonClicked"/>
+
+        <Button
+            Text="Continue" 
+            Clicked="ButtonClicked"/>
     </StackLayout>
 
 </ContentPage>
