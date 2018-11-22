@@ -8,6 +8,7 @@
         <Label Text="Login" Font="30" HorizontalOptions="Center"/>
         <Entry x:Name="username" Placeholder="username"/>
         <Entry x:Name="password" Placeholder="password" IsPassword="True" Completed="ButtonClicked"/>
+        <Label Text="Long/Lat" x:Name="LabelLongLat" /> 
 
         <Button
             Text="Continue" 
