@@ -24,21 +24,21 @@ namespace BestAppClient
 
                 if (location != null)
                 {
-                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                    Debug.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
                     LabelLongLat.Text = "Lat: " + location.Latitude;
                 }
             }
             catch (FeatureNotSupportedException fnsEx)
             {
-                Console.WriteLine(fnsEx.Message); 
+                Debug.WriteLine(fnsEx.Message); 
             }
             catch (PermissionException pEx)
             {
-                Console.WriteLine(pEx.Message);
+                Debug.WriteLine(pEx.Message);
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
 
         }
