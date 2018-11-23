@@ -19,13 +19,13 @@ namespace BestAppClient
         {
             try 
             {
-                var request = new GeolocationRequest(GeolocationAccuracy.Medium);
+                var request = new GeolocationRequest(GeolocationAccuracy.High);
                 var location = await Geolocation.GetLocationAsync(request);
 
                 if (location != null)
                 {
                     Debug.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
-                    LabelLongLat.Text = "Lat: " + location.Latitude;
+                    LabelLongLat.Text = "Latitude: " + location.Latitude + " Longitude: " + location.Longitude;
                 }
             }
             catch (FeatureNotSupportedException fnsEx)

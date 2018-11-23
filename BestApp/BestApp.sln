@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BestAppClient.Android", "Be
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BestAppClient.iOS", "BestAppClient\BestAppClient.iOS\BestAppClient.iOS.csproj", "{198DABDA-565C-41A5-822E-03B93446F9F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BestAppClient", "BestAppClient\BestAppClient\BestAppClient.csproj", "{23130616-BA2C-493C-8AD1-7C0663AB4C78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestAppClient", "BestAppClient\BestAppClient\BestAppClient.csproj", "{23130616-BA2C-493C-8AD1-7C0663AB4C78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -80,7 +80,6 @@ Global
 		{198DABDA-565C-41A5-822E-03B93446F9F1}.AppStore|iPhoneSimulator.Build.0 = AppStore|iPhoneSimulator
 		{198DABDA-565C-41A5-822E-03B93446F9F1}.AppStore|iPhoneSimulator.Deploy.0 = AppStore|iPhoneSimulator
 		{198DABDA-565C-41A5-822E-03B93446F9F1}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
-		{198DABDA-565C-41A5-822E-03B93446F9F1}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
 		{198DABDA-565C-41A5-822E-03B93446F9F1}.Debug|Any CPU.Deploy.0 = Debug|iPhoneSimulator
 		{198DABDA-565C-41A5-822E-03B93446F9F1}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{198DABDA-565C-41A5-822E-03B93446F9F1}.Debug|iPhone.Build.0 = Debug|iPhone
