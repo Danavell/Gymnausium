@@ -15,6 +15,7 @@ namespace BestAppClient.Views
 		public SetFilters ()
 		{
 			InitializeComponent();
+            
 		}
 
         private void GenderSwitch_OnChanged(object sender, ToggledEventArgs e)
@@ -39,8 +40,8 @@ namespace BestAppClient.Views
             }
             else
             {
-                WeightSliderMinimum.IsVisible = true;
-                WeightSliderMaximum.IsVisible = true;
+                WeightSliderMinimum.IsVisible = false;
+                WeightSliderMaximum.IsVisible = false;
                 WeightSwitch.Text = "Filter weight";
             }
         }
@@ -48,6 +49,7 @@ namespace BestAppClient.Views
         private void WeightSlider_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             WeightSwitch.Text = "Filter weight: " + Convert.ToInt16(WeightSliderMinimum.Value) + " - " + Convert.ToInt16(WeightSliderMaximum.Value) + " kg";
+            WeightSliderMinimum.Maximum = WeightSliderMaximum.Value;
         }
         private void AgeSwitch_OnChanged(object sender, ToggledEventArgs e)
         {
@@ -68,6 +70,7 @@ namespace BestAppClient.Views
         private void AgeSlider_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             AgeSwitch.Text = "Filter age: " + Convert.ToInt16(AgeSliderMinimum.Value) + " - " + Convert.ToInt16(AgeSliderMaximum.Value) + " years";
+            AgeSliderMinimum.Maximum = AgeSliderMaximum.Value;
         }
 
         private void AgeSlider_ValueChanged_1(object sender, ValueChangedEventArgs e)
