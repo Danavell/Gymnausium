@@ -13,7 +13,7 @@ namespace BestAppClient
         {
             InitializeComponent();
 
-            MainPage = new SetFilters();
+            MainPage = new ChatCollection();
         }
 
         protected override void OnStart()
