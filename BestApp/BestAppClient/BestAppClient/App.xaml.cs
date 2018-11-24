@@ -1,17 +1,19 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using BestAppClient.Views;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace BestAppClient
 {
     public partial class App : Application
     {
+        public static Guid guid;
         public App()
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new SetFilters();
         }
 
         protected override void OnStart()

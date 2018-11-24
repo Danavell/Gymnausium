@@ -40,7 +40,9 @@ namespace BestAppClient
             {
                 Debug.WriteLine(ex.Message);
             }
-
+            //connect to database, get get guid on succesful login
+            //if successful
+                //App.guid =  
         }
 
     }
