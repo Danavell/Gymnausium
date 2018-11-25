@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:BestAppClient"
-             x:Class="BestAppClient.MainPage">
+             x:Class="BestAppClient.MainPage"
+             Title="Login">
 
     <StackLayout VerticalOptions="CenterAndExpand" Padding="30">
         <Label Text="Login" Font="30" HorizontalOptions="Center"/>
@@ -14,5 +15,4 @@
             Text="Continue" 
             Clicked="ButtonClicked"/>
     </StackLayout>
-
 </ContentPage>

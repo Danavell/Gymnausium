@@ -10,11 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace BestAppClient.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SignUpManually : ContentPage
+	public partial class Profile : ContentPage
 	{
-		public SignUpManually ()
+		public Profile ()
 		{
-			InitializeComponent();
+			InitializeComponent ();
 		}
 	}
 }

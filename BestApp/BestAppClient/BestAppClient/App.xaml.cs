@@ -12,8 +12,7 @@ namespace BestAppClient
         public App()
         {
             InitializeComponent();
-
-            MainPage = new ChatCollection();
+            MainPage = new NavigationPage(new MainPage());
         }
 
         protected override void OnStart()
@@ -29,6 +28,10 @@ namespace BestAppClient
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+        public void SetMainPage(Page page)
+        {
+            MainPage = page;
         }
     }
 }

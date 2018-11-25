@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Diagnostics;
 using Xamarin.Essentials;
+using BestAppClient.Views;
 
 namespace BestAppClient
 {
@@ -17,7 +18,16 @@ namespace BestAppClient
         }
         private async void ButtonClicked(object sender, EventArgs e)
         {
-            try 
+            await GetLocation();
+            await Navigation.PushModalAsync(new MainScreeen());
+            //connect to database, get get guid on succesful login
+            //if successful
+            //App.guid =  
+        }
+
+        private async Task GetLocation()
+        {
+            try
             {
                 var request = new GeolocationRequest(GeolocationAccuracy.High);
                 var location = await Geolocation.GetLocationAsync(request);
@@ -30,7 +40,7 @@ namespace BestAppClient
             }
             catch (FeatureNotSupportedException fnsEx)
             {
-                Debug.WriteLine(fnsEx.Message); 
+                Debug.WriteLine(fnsEx.Message);
             }
             catch (PermissionException pEx)
             {
@@ -40,10 +50,6 @@ namespace BestAppClient
             {
                 Debug.WriteLine(ex.Message);
             }
-            //connect to database, get get guid on succesful login
-            //if successful
-                //App.guid =  
         }
-
     }
 }

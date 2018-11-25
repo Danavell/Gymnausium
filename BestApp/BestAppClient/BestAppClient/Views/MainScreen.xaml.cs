@@ -9,12 +9,12 @@ using Xamarin.Forms.Xaml;
 
 namespace BestAppClient.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SignUpManually : ContentPage
-	{
-		public SignUpManually ()
-		{
-			InitializeComponent();
-		}
-	}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class MainScreeen : TabbedPage
+    {
+        public MainScreeen ()
+        {
+            InitializeComponent();
+        }
+    }
 }

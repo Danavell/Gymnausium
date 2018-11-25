@@ -12,6 +12,7 @@ namespace BestAppClient.ViewModels
 
         public ListUsersViewModel()
         {
+            //get the users from databaase
             for (int i = 0; i < 10; i++)
             {
                 User user = new InternalInfoUser();
