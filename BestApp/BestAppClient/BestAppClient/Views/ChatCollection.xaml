@@ -16,7 +16,7 @@
                     <ColumnDefinition Width="15*" />
                 </Grid.ColumnDefinitions>
                 <Image Source="Icon.png" Scale="0.7" Grid.Row="0" Grid.Column="0" />
-                <Entry Placeholder="Search" VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="1" />
+                <SearchBar Placeholder="Search" VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="1" />
                 <Image Source="Icon.png" Scale="0.5" Grid.Row="0" Grid.Column="2" />
                 <ListView Grid.Row="1" Grid.ColumnSpan="3"
                 ItemsSource="{Binding UserCollection}">
