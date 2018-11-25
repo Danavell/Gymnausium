@@ -16,5 +16,11 @@ namespace BestAppClient.Views
         {
             InitializeComponent();
         }
+
+        //Prevent going back to login page
+        protected override bool OnBackButtonPressed()
+        {
+            return false;
+        }
     }
 }
