@@ -15,15 +15,35 @@ namespace BestAppClient
         public MainPage()
         {
             InitializeComponent();
+            var pair = App.GetLoginCredentialsAsync().Result;
+            if (Validate(pair.Key, pair.Value))
+            {
+                LoginAsync();
+            }
         }
-        private async void ButtonClicked(object sender, EventArgs e)
+        private void ButtonClicked(object sender, EventArgs e)
         {
-            App.LoginToDevice(); // if successful
+            var name = username.Text;
+            var pass = password.Text;
+
+            Validate(name, pass);
+            if (Validate(name, pass))
+            {
+                App.StoreCredentialsToDeviceAsync(name, pass);
+                LoginAsync();
+            }
+        }
+        private async void LoginAsync()
+        {
             await Navigation.PushModalAsync(new MainScreeen());
             await GetLocation();
-            //connect to database, get get guid on succesful login
+        }
+        private bool Validate(string username, string password)
+        {
+            //connect to database, get guid on succesful login
             //if successful
             //App.guid =  
+            return true;
         }
         private async Task GetLocation()
         {

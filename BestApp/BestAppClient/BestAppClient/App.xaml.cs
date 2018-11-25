@@ -3,6 +3,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using BestAppClient.Views;
 using Xamarin.Essentials;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace BestAppClient
@@ -13,15 +15,7 @@ namespace BestAppClient
         public App()
         {
             InitializeComponent();
-            //LogOutFromDevice(); // Uncomment to disable staying logged
-            if (IsLoggedInDevice())
-            {
-                MainPage = new MainScreeen();
-            }
-            else
-            {
-                MainPage = new NavigationPage(new MainPage());
-            }
+            MainPage = new MainPage();
         }
 
         protected override void OnStart()
@@ -42,20 +36,27 @@ namespace BestAppClient
         {
             MainPage = page;
         }
-        private bool IsLoggedInDevice()
+        /// <summary>
+        /// Gets login credentials stored from device
+        /// </summary>
+        /// <returns>Key: username, Value: password</returns>
+        public static async Task<KeyValuePair<string, string>> GetLoginCredentialsAsync()
         {
-            return Preferences.Get("IsLogged", false);
+            var username = await SecureStorage.GetAsync("username");
+            var password = await SecureStorage.GetAsync("password");
+            return new KeyValuePair<string, string>(username, password);
         }
-        public static void LoginToDevice()
+        public static async void StoreCredentialsToDeviceAsync(string username, string password)
         {
-            Preferences.Set("IsLogged", true);
+            await SecureStorage.SetAsync("username", username);
+            await SecureStorage.SetAsync("password", password);
         }
         /// <summary>
         /// Call this method when logging out
         /// </summary>
         public static void LogOutFromDevice()
         {
-            Preferences.Set("IsLogged", false);
+            SecureStorage.Remove("password");
         }
     }
 }
