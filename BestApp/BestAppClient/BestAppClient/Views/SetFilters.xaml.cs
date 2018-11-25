@@ -46,10 +46,21 @@ namespace BestAppClient.Views
             }
         }
 
-        private void WeightSlider_ValueChanged(object sender, ValueChangedEventArgs e)
+        private void WeightSliderMaximum_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             WeightSwitch.Text = "Filter weight: " + Convert.ToInt16(WeightSliderMinimum.Value) + " - " + Convert.ToInt16(WeightSliderMaximum.Value) + " kg";
-            WeightSliderMinimum.Maximum = WeightSliderMaximum.Value;
+            if (WeightSliderMaximum.Value < WeightSliderMinimum.Value)
+            {
+                WeightSliderMinimum.Value = WeightSliderMaximum.Value;
+            }
+        }
+        private void WeightSliderMinimum_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            WeightSwitch.Text = "Filter weight: " + Convert.ToInt16(WeightSliderMinimum.Value) + " - " + Convert.ToInt16(WeightSliderMaximum.Value) + " kg";
+            if (WeightSliderMinimum.Value > WeightSliderMaximum.Value)
+            {
+                WeightSliderMaximum.Value = WeightSliderMinimum.Value;
+            }
         }
         private void AgeSwitch_OnChanged(object sender, ToggledEventArgs e)
         {
@@ -66,16 +77,21 @@ namespace BestAppClient.Views
                 AgeSwitch.Text = "Filter age";
             }
         }
-
-        private void AgeSlider_ValueChanged(object sender, ValueChangedEventArgs e)
+        private void AgeSliderMaximum_ValueChanged(object sender, ValueChangedEventArgs e)
         {
             AgeSwitch.Text = "Filter age: " + Convert.ToInt16(AgeSliderMinimum.Value) + " - " + Convert.ToInt16(AgeSliderMaximum.Value) + " years";
-            AgeSliderMinimum.Maximum = AgeSliderMaximum.Value;
+            if (AgeSliderMaximum.Value < AgeSliderMinimum.Value)
+            {
+                AgeSliderMinimum.Value = AgeSliderMaximum.Value;
+            }
         }
-
-        private void AgeSlider_ValueChanged_1(object sender, ValueChangedEventArgs e)
+        private void AgeSliderMinimum_ValueChanged(object sender, ValueChangedEventArgs e)
         {
-
+            AgeSwitch.Text = "Filter age: " + Convert.ToInt16(AgeSliderMinimum.Value) + " - " + Convert.ToInt16(AgeSliderMaximum.Value) + " years";
+            if (AgeSliderMinimum.Value > AgeSliderMaximum.Value)
+            {
+                AgeSliderMaximum.Value = AgeSliderMinimum.Value;
+            }
         }
     }
 }

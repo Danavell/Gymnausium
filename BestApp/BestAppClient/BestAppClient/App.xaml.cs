@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using BestAppClient.Views;
+using Xamarin.Essentials;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace BestAppClient
@@ -12,7 +13,15 @@ namespace BestAppClient
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new MainPage());
+            //LogOutFromDevice(); // Uncomment to disable staying logged
+            if (IsLoggedInDevice())
+            {
+                MainPage = new MainScreeen();
+            }
+            else
+            {
+                MainPage = new NavigationPage(new MainPage());
+            }
         }
 
         protected override void OnStart()
@@ -21,7 +30,7 @@ namespace BestAppClient
         }
 
         protected override void OnSleep()
-        {
+        {     
             // Handle when your app sleeps
         }
 
@@ -32,6 +41,21 @@ namespace BestAppClient
         public void SetMainPage(Page page)
         {
             MainPage = page;
+        }
+        private bool IsLoggedInDevice()
+        {
+            return Preferences.Get("IsLogged", false);
+        }
+        public static void LoginToDevice()
+        {
+            Preferences.Set("IsLogged", true);
+        }
+        /// <summary>
+        /// Call this method when logging out
+        /// </summary>
+        public static void LogOutFromDevice()
+        {
+            Preferences.Set("IsLogged", false);
         }
     }
 }

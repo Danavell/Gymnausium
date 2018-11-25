@@ -18,13 +18,13 @@ namespace BestAppClient
         }
         private async void ButtonClicked(object sender, EventArgs e)
         {
-            await GetLocation();
+            App.LoginToDevice(); // if successful
             await Navigation.PushModalAsync(new MainScreeen());
+            await GetLocation();
             //connect to database, get get guid on succesful login
             //if successful
             //App.guid =  
         }
-
         private async Task GetLocation()
         {
             try
