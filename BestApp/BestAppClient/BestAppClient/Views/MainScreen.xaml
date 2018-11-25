@@ -8,7 +8,7 @@
 
         <me:SetFilters/>
         <me:ChatCollection />
-        <me:Profile/>
+        <me:InternalProfile/>
 
     </TabbedPage.Children>
 </TabbedPage>

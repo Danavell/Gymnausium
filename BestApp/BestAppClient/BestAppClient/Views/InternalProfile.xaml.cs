@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace BestAppClient.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Profile : ContentPage
+	public partial class InternalProfile : ContentPage
 	{
-		public Profile ()
+		public InternalProfile ()
 		{
 			InitializeComponent ();
 		}
