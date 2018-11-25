@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using BestAppClient.ViewModels;
+using BestAppClient.Model;
 
 namespace BestAppClient.Views
 {
@@ -16,8 +17,12 @@ namespace BestAppClient.Views
 		public ChatCollection ()
 		{
 			InitializeComponent ();
-            BindingContext = new ListUsersViewModel();
+            BindingContext = new ListChatViewModel();
         }
 
-	}
+        private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+
+        }
+    }
 }

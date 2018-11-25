@@ -19,14 +19,14 @@ namespace Data_Access_Layer.Repositories
             command.AddQueryParamters("@lo", longitude);
             command.AddQueryParamters("@Lname", search_distance);
 
-            command.ExecuteReaderWithRowAction((rdr) =>
-            {
-                resultList.Add(
-                    new ExternalInfoUser(
-                        user_guid: int.Parse(rdr["ID"].ToString()),
-                        fname: rdr["Fname"] as string
-                );
-            });
+            //command.ExecuteReaderWithRowAction((rdr) =>
+            //{
+            //    resultList.Add(
+            //        new ExternalInfoUser(
+            //            user_guid: int.Parse(rdr["ID"].ToString()),
+            //            fname: rdr["Fname"] as string
+            //    );
+            //});
             bool outcome = false;
             return (outcome, resultList);
         }

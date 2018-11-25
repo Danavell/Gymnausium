@@ -7,9 +7,9 @@ namespace BestAppClient.Model
 {
     public class ExternalInfoUser : User
     {
-        public float Distance { get; set; }
+        public double Distance { get; set; }
         public ExternalInfoUser(int user_guid) { }
-        public ExternalInfoUser(Guid user_guid, string fname, int age, int gender, int weight, string desc, float distance) : base(user_guid, gender, weight, fname, age, desc)
+        public ExternalInfoUser(Guid user_guid, string fname, int age, int gender, int weight, string desc, double distance) : base(user_guid, gender, weight, fname, age, desc)
         {
             Distance = distance;
         }
