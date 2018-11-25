@@ -37,7 +37,7 @@ namespace BestAppClient
             MainPage = page;
         }
         /// <summary>
-        /// Gets login credentials stored from device
+        /// Gets login credentials from device. Key for username, value for password
         /// </summary>
         /// <returns>Key: username, Value: password</returns>
         public static async Task<KeyValuePair<string, string>> GetLoginCredentialsAsync()
@@ -46,13 +46,18 @@ namespace BestAppClient
             var password = await SecureStorage.GetAsync("password");
             return new KeyValuePair<string, string>(username, password);
         }
+        /// <summary>
+        /// Store login credentials to device for automatic login. Data are encrypted.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
         public static async void StoreCredentialsToDeviceAsync(string username, string password)
         {
             await SecureStorage.SetAsync("username", username);
             await SecureStorage.SetAsync("password", password);
         }
         /// <summary>
-        /// Call this method when logging out
+        /// Remove password from device's storage
         /// </summary>
         public static void LogOutFromDevice()
         {

@@ -16,9 +16,10 @@ namespace BestAppClient
         {
             InitializeComponent();
             var pair = App.GetLoginCredentialsAsync().Result;
+
             if (Validate(pair.Key, pair.Value))
             {
-                LoginAsync();
+                LoginAsync(); //Comment to disable auto login
             }
         }
         private void ButtonClicked(object sender, EventArgs e)
@@ -29,15 +30,24 @@ namespace BestAppClient
             Validate(name, pass);
             if (Validate(name, pass))
             {
-                App.StoreCredentialsToDeviceAsync(name, pass);
+                App.StoreCredentialsToDeviceAsync(name, pass); // throws exception when name or pass is null. In production it is not possible.
                 LoginAsync();
             }
         }
+        /// <summary>
+        /// Shows home screen.
+        /// </summary>
         private async void LoginAsync()
         {
             await Navigation.PushModalAsync(new MainScreeen());
             await GetLocation();
         }
+        /// <summary>
+        /// Returns true if username and password are correct.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         private bool Validate(string username, string password)
         {
             //connect to database, get guid on succesful login
