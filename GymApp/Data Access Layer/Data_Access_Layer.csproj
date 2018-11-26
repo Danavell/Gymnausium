@@ -47,8 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IChat.cs" />
     <Compile Include="IUserDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ChatDAO.cs" />
     <Compile Include="Repositories\MOCK_DAO_Connection.cs" />
     <Compile Include="Repositories\UserDAO.cs" />
     <Compile Include="Shared\DBCommand.cs" />
