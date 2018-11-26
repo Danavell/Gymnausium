@@ -16,5 +16,19 @@ namespace BestAppClient.Views
 		{
 			InitializeComponent ();
 		}
-	}
+
+        private void LogoutImage_Tapped(object sender, EventArgs e)
+        {
+            DisplayAlert("Alert", "You have logged out", "OK");
+        }
+
+        private void ChangeProfileDetailsImage_Tapped(object sender, EventArgs e)
+        {
+            DisplayAlert("Alert", "You want to change profile details", "OK");
+        }
+        private void ChangeProfilePictureImage_Tapped(object sender, EventArgs e)
+        {
+            DisplayAlert("Alert", "You want to change profile picture", "OK");
+        }
+    }
 }
