@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BestAppClient.Views.InternalProfile"
+             Title="Profile">
+    <StackLayout>
+        <Grid ColumnSpacing="0" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>            
+            <Image HeightRequest="200" Grid.Row="0" HorizontalOptions="Center" Source="Icon.png" TranslationY="50" VerticalOptions="End" WidthRequest="200" />
+
+            <!--  Profile Name this will b Included  -->
+            <StackLayout Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                <Label HorizontalTextAlignment="Center" Style="{StaticResource ProfileNameLabel}" Text="Your Name" />
+                <Label Margin="0,-5" HorizontalTextAlignment="Center" Style="{StaticResource ProfileTagLabel}" Text="Your Description" />
+            </StackLayout>
+            <!--  Social Stats Section  -->
+            <Grid Grid.Row="2" Margin="0,30" ColumnSpacing="0" RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackLayout>
+                    <Image Source="logout.png" HeightRequest="60" WidthRequest="60">
+                        <Image.GestureRecognizers>
+                                        <TapGestureRecognizer
+                            Tapped="LogoutImage_Tapped"
+                            NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Style="{StaticResource StatsCaptionLabel}" Text="Log out" />
+                </StackLayout>
+                <StackLayout Grid.Column="1">
+                    <Image Source="document.png" HeightRequest="60" WidthRequest="60">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="ChangeProfileDetailsImage_Tapped"
+                                NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Style="{StaticResource StatsCaptionLabel}" Text="Change Details" />
+                </StackLayout>
+                <StackLayout Grid.Column="2">
+                    <Image Source="picture.png" HeightRequest="60" WidthRequest="60">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="ChangeProfilePictureImage_Tapped"
+                                NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Label Style="{StaticResource StatsCaptionLabel}" Text="Change Photo" />
+                </StackLayout>
+            </Grid>
+        </Grid>
+    </StackLayout>
+</ContentPage>
