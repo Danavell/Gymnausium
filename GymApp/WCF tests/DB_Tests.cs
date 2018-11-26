@@ -19,15 +19,17 @@ namespace Database_Tests
         [TestMethod]
         public void Validation_Test()
         {
-            bool x = Validation_Outcome("email", "password").Result;
-            Assert.IsTrue(x);
+            Guid test_guid = new Guid();
+            Guid x = (Guid)Validation_Outcome("email", "password").Result;
+            Assert.IsFalse(x.ToString() == test_guid.ToString());
         }
 
         [TestMethod]
         public void Validation_Fail_Test()
         {
-            bool x = Validation_Outcome("false", "false").Result;
-            Assert.IsFalse(x);
+            Guid test_guid = new Guid();
+            Guid x = (Guid)Validation_Outcome("false", "false").Result;
+            Assert.IsFalse(x.ToString() == test_guid.ToString());
         }
         
         public void Update_User_Test()
@@ -44,7 +46,7 @@ namespace Database_Tests
             return await userDAO.Create(new InternalInfoUser(g, 0, 100, "email", "password", "fname", "lname", 100, "desc"));
         }
 
-        public async Task<bool> Validation_Outcome(string email, string password)
+        public async Task<Guid?> Validation_Outcome(string email, string password)
         {
             UserDAO userDAO = new UserDAO();
             return await userDAO.Login_Validation(email, password);

@@ -44,7 +44,7 @@ namespace GymAppService
             throw new NotImplementedException();
         }
 
-        public async Task<bool?> Login_Validation(string email, string password)
+        public async Task<Guid?> Login_Validation(string email, string password)
         {
             return await _dao.Login_Validation(email, password);
         }
@@ -56,7 +56,7 @@ namespace GymAppService
             return Task.Run(() => user.Password == "password");
         }
 
-        public Task<bool?> Login_Validation(string email, string password)
+        public Task<Guid?> Login_Validation(string email, string password)
         {
             throw new NotImplementedException();
         }

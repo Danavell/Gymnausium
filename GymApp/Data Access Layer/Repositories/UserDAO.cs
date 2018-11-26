@@ -32,22 +32,23 @@ namespace Data_Access_Layer.Repositories
         }
 
 
-        private bool? Check_Credentials(string email, string password)
+        private Guid? Check_Credentials(string email, string password)
         {
             var transaction = TransactionContext.New(IsolationLevel.Serializable);
             try
             {
-                DBCommand command = new DBCommand("EXEC dbo.Count_Login_Authentication @Email = @email, @Password = @password, @Bool = @bool", transaction);
-                command.AddQueryParamters("@email", email);
-                command.AddQueryParamters("@password", password);
-                command.AddQueryParamters("@bool", 0);
-                int result = (int)command.ExecuteScalar();
+                //DBCommand command = new DBCommand("EXEC dbo.Count_Login_Authentication @Email = @email, @Password = @password, @Bool = @bool", transaction);
+                //command.AddQueryParamters("@email", email);
+                //command.AddQueryParamters("@password", password);
+                //command.AddQueryParamters("@bool", 0);
+                //int result = (int)command.ExecuteScalar();
 
-                Change_Last_Login_Date(email, transaction);
+                //Change_Last_Login_Date(email, transaction);
 
-                transaction.Commit();
+                //transaction.Commit();
 
-                return Convert.ToBoolean(result);
+                //return Convert.ToBoolean(result);
+                return Guid.NewGuid();
             }
             catch (Exception)
             {
@@ -158,7 +159,7 @@ namespace Data_Access_Layer.Repositories
             return await Task.FromResult(UpdateUser(user));
         }
 
-        public async Task<bool?> Login_Validation(string email, string password)
+        public async Task<Guid?> Login_Validation(string email, string password)
         {
             return await Task.FromResult(Check_Credentials(email, password));
         }

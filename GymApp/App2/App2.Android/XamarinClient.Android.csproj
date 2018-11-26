@@ -91,12 +91,6 @@
     <Folder Include="Resources\drawable-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\App2\XamarinClient.csproj">
-      <Project>{424B34E9-ACB6-4A31-8A0C-F64C8D01F9FC}</Project>
-      <Name>XamarinClient</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\Icon.png">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
       <SubType>Designer</SubType>

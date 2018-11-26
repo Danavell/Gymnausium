@@ -25,7 +25,7 @@ namespace GymAppService
         [OperationContract]
         Task<bool> BlockUser(ExternalInfoUser user);
         [OperationContract]
-        Task<bool?> Login_Validation(string email, string password);
+        Task<Guid?> Login_Validation(string email, string password);
 
         [OperationContract]
         Task<ICollection<ExternalInfoUser>> GetMatchedUsers();
