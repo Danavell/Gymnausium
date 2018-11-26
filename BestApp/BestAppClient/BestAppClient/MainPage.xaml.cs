@@ -30,7 +30,7 @@ namespace BestAppClient
             Validate(name, pass);
             if (Validate(name, pass))
             {
-                App.StoreCredentialsToDeviceAsync(name, pass); // throws exception when name or pass is null. In production it is not possible.
+                App.StoreCredentialsToDeviceAsync(name, pass); // throws exception when name or pass is null. In production it is not possible.                
                 LoginAsync();
             }
         }
@@ -53,7 +53,10 @@ namespace BestAppClient
             //connect to database, get guid on succesful login
             //if successful
             //App.guid =  
-            return true;
+            if (username == "123" && password == "123")
+                return true;
+            else
+                return false;
         }
         private async Task GetLocation()
         {
