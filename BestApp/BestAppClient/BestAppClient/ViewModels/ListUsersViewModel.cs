@@ -18,7 +18,7 @@ namespace BestAppClient.ViewModels
                 User user = new InternalInfoUser();
                 user.First_Name = "Pickle Rick " + i.ToString();
                 user.Age = i;
-                user.Description = "Icon.png";
+                user.Description = "i fucked your mom";
                 UserCollection.Add(user);
             }
         }

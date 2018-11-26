@@ -53,7 +53,7 @@ namespace BestAppClient
             //connect to database, get guid on succesful login
             //if successful
             //App.guid =  
-            if (username == "123" && password == "123")
+            if (username == "1234" && password == "123")
                 return true;
             else
                 return false;
