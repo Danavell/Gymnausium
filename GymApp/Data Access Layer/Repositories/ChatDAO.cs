@@ -11,21 +11,6 @@ namespace Data_Access_Layer.Repositories
 {
     class ChatDAO : IChat
     {
-        public Task<bool> Add_Message(Message message)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<bool> Create_Chat(Guid chat_guid, IEnumerable<Guid> participants, string group_name)
-        {
-            return await Task.FromResult(Add_chat(chat_guid, participants, group_name));
-        }
-
-        public IEnumerable<Chat> Retrieve_Chats(Guid user_guid, int message_range, int chat_range)
-        {
-            throw new NotImplementedException();
-        }
-
         private bool Insert_Message(Message message)
         {
             /*READUNCOMMITTED
@@ -90,6 +75,44 @@ namespace Data_Access_Layer.Repositories
                 Console.WriteLine(e.Message);
                 return false;
             }
+        }
+
+        public IEnumerable<Chat> Return_Chats(Guid user_guid, int start_position, int chat_range)
+        {
+            var result_set = new List<Chat>();
+
+            var command = new DBCommand("SELECT TOP 20 * FROM [Chat] INNER JOIN [User_Chat] ON [Chat].chat_guid = [User_Chat].chat_guid WHERE ROWNUM >= @START_POSITION AND user_guid = @USER_GUID");
+
+            command.AddQueryParamters("@START_POSITION", start_position);
+            command.AddQueryParamters("@USER_GUID", user_guid);
+            
+            command.ExecuteReaderWithRowAction((rdr) =>
+            {
+                result_set.Add(
+                    new Chat()
+                    {
+                        Chat_Guid = (Guid)rdr["user_guid"]
+                    }
+                );
+            });
+
+
+            return result_set;
+        }
+
+        public async Task<bool> Add_Message(Message message)
+        {
+            return await Task.FromResult(Insert_Message(message));
+        }
+
+        public async Task<bool> Create_Chat(Guid chat_guid, IEnumerable<Guid> participants, string group_name)
+        {
+            return await Task.FromResult(Add_chat(chat_guid, participants, group_name));
+        }
+
+        public IEnumerable<Chat> Retrieve_Chats(Guid user_guid, int message_range, int chat_range)
+        {
+            throw new NotImplementedException();
         }
     }
 }
