@@ -6,9 +6,9 @@
   <!--Pages can be added as references or inline-->
     <TabbedPage.Children>
 
-        <me:SetFilters/>
-        <me:ChatCollection />
         <me:InternalProfile/>
+        <me:ChatCollection />
+        <me:SetFilters/>
 
     </TabbedPage.Children>
 </TabbedPage>

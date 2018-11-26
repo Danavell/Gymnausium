@@ -15,7 +15,8 @@ namespace BestAppClient
         public App()
         {
             InitializeComponent();
-            MainPage = new ChatCollection();
+            MainPage = new NavigationPage(new MainPage());
+            // MainPage = new ChatCollection();
         }
 
         protected override void OnStart()
