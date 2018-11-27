@@ -24,7 +24,7 @@ namespace GymAppService
             return await _dao.Create(user);
         }
 
-        public async Task<bool> Disable(ExternalInfoUser user)
+       public async Task<bool> Disable(ExternalInfoUser user)
         {
             throw new NotImplementedException();
         }

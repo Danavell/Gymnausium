@@ -9,12 +9,12 @@ using Xamarin.Forms.Xaml;
 
 namespace BestAppClient.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    
+    [XamlCompilation(XamlCompilationOptions.Compile)]   
+
 
     public partial class SignUpManually : ContentPage
-	{
-        private int gender;
+    {
+     /*   private int gender;
         Entry genderEntry;
 
         private int weight;
@@ -25,6 +25,7 @@ namespace BestAppClient.Views
 
         private string password;
         Entry passwordEntry;
+       
 
         private string fname;
         Entry fnameEntry;
@@ -39,11 +40,29 @@ namespace BestAppClient.Views
         Entry descEntry;
 
         private bool disabled;
-       
 
+        Button btnCancel;
+        Button btnCreate;
+        
+            */
         public SignUpManually ()
 		{
+         /*   List<String> genders = new List<String>();
+            genders.Add("Male");
+            genders.Add("Female");
+            genders.Add("Not defined");
+
+            Picker genderPic = new Picker();
+            genderPic.ItemsSource = genders;
+
+            var stackayout = new StackLayout { Children = { genderPic, weightEntry, emailEntry, passwordEntry, fnameEntry, lnameEntry, ageEntry, descEntry } };
+
+          
+            
+
+            weight = int.Parse(weightEntry.Text);*/
 			InitializeComponent();
+           
 		}
 	}
 }

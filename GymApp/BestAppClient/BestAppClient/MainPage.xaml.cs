@@ -22,6 +22,10 @@ namespace BestAppClient
                 LoginAsync(); //Comment to disable auto login
             }
         }
+        private async void SignUpButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new SignUpManually());
+        }
         private void ButtonClicked(object sender, EventArgs e)
         {
             var name = username.Text;
@@ -83,6 +87,11 @@ namespace BestAppClient
             {
                 Debug.WriteLine(ex.Message);
             }
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+
         }
     }
 }

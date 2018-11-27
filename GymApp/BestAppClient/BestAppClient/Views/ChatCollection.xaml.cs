@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using BestAppClient.ViewModels;
-using BestAppClient.Model;
+using Model_Layer;
 
 namespace BestAppClient.Views
 {
