@@ -22,7 +22,7 @@ namespace BestAppClient.Views
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-
+            DisplayAlert("Alert", "selected an item", "OK");
         }        
     }
 }

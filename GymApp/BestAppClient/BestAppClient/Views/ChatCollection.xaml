@@ -24,8 +24,8 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ImageCell
-                            Text="{Binding Last_Author}"	
-                            Detail="{Binding Last_Message}"	
+                            Text="{Binding ChatName}"	
+                            Detail="{Binding LastMessage}"	
                             TextColor="Black"	
                             DetailColor="LightGray">
                             </ImageCell>
