@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BestAppClient.Views.ChangeAccountDetails"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <TableView HasUnevenRows="True" Intent="Form">
+            <TableRoot>
+                <TableSection Title="Account">
+                    <EntryCell x:Name="newEmail" Text="{Binding User.Email}" Label="New Email" Placeholder="Enter new email" Keyboard="Email"/>
+                    <EntryCell x:Name="newEmailConfirm"  Label="Confirm Email" Placeholder="Retype new email" Keyboard="Email"/>
+                    <ViewCell Height="60">
+                        <StackLayout Spacing="0" Padding="15,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Label Text="Your password" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand"/>
+                            <Entry x:Name="password" Placeholder="Enter your password" VerticalOptions="CenterAndExpand" IsPassword="True"/>
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell Height="60">
+                        <StackLayout Spacing="0" Padding="15,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Label Text="New password" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand"/>
+                            <Entry x:Name="newPassword" Placeholder="Enter new password" VerticalOptions="CenterAndExpand" IsPassword="True"/>
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell Height="60">
+                        <StackLayout Spacing="0" Padding="15,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Label Text="Confirm new password" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand"/>
+                            <Entry x:Name="newPasswordConfirm" Placeholder="Retype new password" VerticalOptions="CenterAndExpand" IsPassword="True"/>
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell Height="60">
+                        <Button Text="Save" HorizontalOptions="Center" Clicked="AccountSaveClicked"/>
+                    </ViewCell>
+                </TableSection>
+                <TableSection Title="Profile">
+                    <EntryCell x:Name="Age" Label="Age" Text="{Binding User.Age}" Placeholder="Enter your age" Keyboard="Numeric"/>
+                    <EntryCell x:Name="Weight" Label="Weight" Text="{Binding User.Weight}" Placeholder="Enter your weight" Keyboard="Numeric"/>
+                    <EntryCell x:Name="FirstName" Label="First name" Text="{Binding User.First_Name}" Placeholder="Enter your first name" Keyboard="Text"/>
+                    <EntryCell x:Name="LastName" Label="Last name" Text="{Binding User.Last_Name}" Placeholder="Enter your first name" Keyboard="Text"/>
+                    <ViewCell Height="60">
+                        <StackLayout Spacing="0" Padding="15,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Label Text="Gender" VerticalTextAlignment="Center" VerticalOptions="CenterAndExpand"/>
+                            <Picker x:Name="GenderPicker" VerticalOptions="CenterAndExpand" SelectedIndex="{Binding GenderIndex}">
+                                <Picker.Items>
+                                    <x:String>Male</x:String>
+                                    <x:String>Female</x:String>
+                                    <x:String>Either</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                    </ViewCell>
+                    <ViewCell>
+                        <Grid MinimumHeightRequest="60" ColumnSpacing="0" Padding="15,0" HorizontalOptions="FillAndExpand">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Text="Description" VerticalOptions="CenterAndExpand"/>
+                            <Editor Grid.Column="1" Text="{Binding User.Description}" Placeholder="Tell something about you" Keyboard="Chat" VerticalOptions="CenterAndExpand" AutoSize="TextChanges"/>
+                        </Grid>
+                    </ViewCell>
+                    <ViewCell Height="60">
+                        <Button Text="Save" HorizontalOptions="Center" Clicked="ProfileSaveClicked"/>
+                    </ViewCell>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>

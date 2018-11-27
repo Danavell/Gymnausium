@@ -22,9 +22,10 @@ namespace BestAppClient.Views
             DisplayAlert("Alert", "You have logged out", "OK");
         }
 
-        private void ChangeProfileDetailsImage_Tapped(object sender, EventArgs e)
+        private async void ChangeProfileDetailsImage_TappedAsync(object sender, EventArgs e)
         {
-            DisplayAlert("Alert", "You want to change profile details", "OK");
+            await Navigation.PushAsync(new ChangeAccountDetails());
+            //DisplayAlert("Alert", "You want to change profile details", "OK");
         }
         private void ChangeProfilePictureImage_Tapped(object sender, EventArgs e)
         {

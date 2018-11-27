@@ -5,29 +5,28 @@ using System.Text;
 
 namespace BestAppClient.ViewModels
 {
-    public class ChangeAccountDetailsViewModel
+    public class ChangeAccountDetailsViewModel : BaseViewModel
     {
-        public string Title { get; set; }
-
-        public IList<string> Genders { get { return Enum.GetNames(typeof(User.Genders)); } }
-        public string SelectedGender { get; set; }
-        private User.Genders SelectedGenderEnum
-        {
-            get
-            {
-                Enum.TryParse(SelectedGender, out User.Genders gender);
-                return gender;
-            }
-        }
+        public int GenderIndex { get; set; }
 
         public InternalInfoUser User { get; set; }
-        public string OldEmail { get; set; }
 
-        public ChangeAccountDetailsViewModel(InternalInfoUser user)
+        public ChangeAccountDetailsViewModel()
         {
-            User = user;
-            OldEmail = user.Email;
-            Title = "Change detials";
+            Title = "Change details";
+            //Get user from db
+            User = new InternalInfoUser()
+            {
+                Age = 23,
+                Email = "123@ucn.dk",
+                First_Name = "Sama",
+                Last_Name = "Lama",
+                Gender = 1,
+                Weight = 77,
+                Description = "askjdjkafh kashdfkhafk laksjflkasjf  salkfj lajsdflkj ",
+                Password = "123",
+            };
+            GenderIndex = User.Gender;
         }
     }
 }

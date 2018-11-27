@@ -38,7 +38,7 @@
                     <Image Source="document.png" HeightRequest="60" WidthRequest="60">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer
-                                Tapped="ChangeProfileDetailsImage_Tapped"
+                                Tapped="ChangeProfileDetailsImage_TappedAsync"
                                 NumberOfTapsRequired="1" />
                         </Image.GestureRecognizers>
                     </Image>
