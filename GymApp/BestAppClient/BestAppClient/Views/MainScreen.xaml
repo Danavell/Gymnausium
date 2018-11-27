@@ -5,10 +5,20 @@
              x:Class="BestAppClient.Views.MainScreeen">
   <!--Pages can be added as references or inline-->
     <TabbedPage.Children>
-
-        <me:InternalProfile/>
-        <me:ChatCollection />
-        <me:SetFilters/>
-
+        <NavigationPage Title="Profile">
+            <x:Arguments>
+                <me:InternalProfile/>
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="Matches">
+            <x:Arguments>
+                <me:ChatCollection />
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="Filters">
+            <x:Arguments>
+                <me:SetFilters/>
+            </x:Arguments>
+        </NavigationPage>
     </TabbedPage.Children>
 </TabbedPage>
