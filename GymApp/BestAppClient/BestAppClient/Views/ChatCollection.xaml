@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BestAppClient.Views.ChatCollection"
+             Title="Matches">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="90*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*" />
+                    <ColumnDefinition Width="70*" />
+                    <ColumnDefinition Width="15*" />
+                </Grid.ColumnDefinitions>
+                <Image Source="Icon.png" Scale="0.7" Grid.Row="0" Grid.Column="0" />
+                <SearchBar Placeholder="Search" VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="1" />
+                <Image Source="Icon.png" Scale="0.5" Grid.Row="0" Grid.Column="2" />
+                <ListView Grid.Row="1" Grid.ColumnSpan="3"	
+                ItemsSource="{Binding ChatCollection}"
+                          ItemSelected="ListView_ItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ImageCell
+                            Text="{Binding Last_Author}"	
+                            Detail="{Binding Last_Message}"	
+                            TextColor="Black"	
+                            DetailColor="LightGray">
+                            </ImageCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,26 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+
+namespace BestAppClient.Views
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class MainScreeen : TabbedPage
+    {
+        public MainScreeen ()
+        {
+            InitializeComponent();
+        }
+
+        //Prevent going back to login page
+        protected override bool OnBackButtonPressed()
+        {
+            return false;
+        }
+    }
+}
