@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using BestAppClient.ViewModels;
-using BestAppClient.Model;
+using Model_Layer;
 
 namespace BestAppClient.Views
 {
@@ -22,7 +22,7 @@ namespace BestAppClient.Views
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-
+            DisplayAlert("Alert", "selected an item", "OK");
         }        
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using BestAppClient.Model;
+using Model_Layer;
 using System.Text;
 
 namespace BestAppClient.ViewModels
@@ -19,10 +19,11 @@ namespace BestAppClient.ViewModels
 
                 List<Message> messages = new List<Message>();
 
-                message.Message_Author = new ExternalInfoUser(new Guid(), "Dave", 18, 0, 80, "fuck this", 1.23432);
+                message.Message_Author = new ExternalInfoUser(new Guid(), "Dave", 18, 0, 80, "fuck this",1.23432f);
                 message.Message_Text = "Whats up bro?";
                 messages.Add(message);
                 chat.Messages = messages;
+                chat.UpdateLastMessageDetails();
                 ChatCollection.Add(chat);
             }
         }
