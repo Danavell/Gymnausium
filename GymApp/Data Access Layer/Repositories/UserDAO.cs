@@ -179,6 +179,7 @@ namespace Data_Access_Layer.Repositories
                 user.Weight = (int)rdr["weigh"];
                 user.Description = rdr["descrip"] as string;
                 user.Distance = (double)rdr["distance"];
+                Get_Filters((Guid)rdr["user_guid"]);
             });
             return user;
         }

@@ -15,7 +15,7 @@ namespace GymApp
             _cs = cs;
         }
 
-        public Task<bool> Add_Message(Message message)
+        public Task<bool> Add_Message(Message message, Guid chat_guid)
         {
             throw new NotImplementedException();
         }

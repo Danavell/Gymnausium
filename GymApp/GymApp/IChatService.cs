@@ -12,7 +12,7 @@ namespace GymApp
     public interface IChatService
     {
         [OperationContract]
-        Task<bool> Add_Message(Message message);
+        Task<bool> Add_Message(Message message, Guid chat_guid);
 
         [OperationContract]
         Task<bool> Create_Chat(Guid chat_guid, IEnumerable<Guid> participants, string group_name);

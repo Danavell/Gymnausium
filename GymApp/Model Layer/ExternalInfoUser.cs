@@ -8,9 +8,9 @@ namespace Model_Layer
     [DataContract]
     public class ExternalInfoUser : User
     {
-        [DataMember] public float Distance { get; set; }
-        public ExternalInfoUser(Guid guid, int user_guid) { }
-        public ExternalInfoUser(Guid user_guid, string fname, int age, int gender, int weight, string desc, float distance) : base(user_guid, gender, weight, fname, age, desc)
+        [DataMember] public double Distance { get; set; }
+        public ExternalInfoUser() { }
+        public ExternalInfoUser(Guid user_guid, string fname, int age, string gender, int weight, string desc, double distance, Filters filters) : base(user_guid, gender, weight, fname, age, desc)
         {
             Distance = distance;
         }

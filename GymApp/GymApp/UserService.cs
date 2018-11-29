@@ -48,6 +48,11 @@ namespace GymAppService
         {
             return await _dao.Login_Validation(email, password);
         }
+
+        public Task<bool> Update_Filters(Guid user_guid)
+        {
+            throw new NotImplementedException();
+        }
     }
     public class MockDAO : IUserDAO
     {

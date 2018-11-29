@@ -11,9 +11,9 @@ namespace Data_Access_Layer.Repositories
 {
     class ChatDAO : IChat
     {
-        public async Task<bool> Add_Message(Message message)
+        public async Task<bool> Add_Message(Message message, Guid chat_guid)
         {
-            return await Task.FromResult(Insert_Message(message));
+            return await Task.FromResult(Insert_Message(message, chat_guid));
         }
 
         public async Task<bool> Create_Chat(Guid chat_guid, IEnumerable<Guid> participants, string group_name)
@@ -26,7 +26,7 @@ namespace Data_Access_Layer.Repositories
             throw new NotImplementedException();
         }
 
-        private bool Insert_Message(Message message)
+        private bool Insert_Message(Message message, Guid chat_guid)
         {
             /*READUNCOMMITTED
              * No one including the original creator of the message can edit or delete it.
@@ -42,7 +42,7 @@ namespace Data_Access_Layer.Repositories
 
                 command.AddQueryParamters("@DateTime", message.Message_Datetime);
                 command.AddQueryParamters("@MessageText", message.Message_Text);
-                // command.AddQueryParamters("@MessageChatGuid", message.Message_Chat_Guid); property moved to chat
+                command.AddQueryParamters("@MessageChatGuid", chat_guid); 
                 command.AddQueryParamters("@UserGuid", message.Message_Author.User_Guid);
 
                 command.ExecuteNonQuery();
@@ -106,7 +106,7 @@ namespace Data_Access_Layer.Repositories
                 result_set.Add(
                     new Chat()
                     {
-                        Chat_Guid = (Guid)rdr["chat_guid"],
+                        Message_Chat_Guid = (Guid)rdr["chat_guid"],
                         Messages = Chat_Return_Messages((Guid)rdr["chat_guid"])
                     }
                 );
@@ -131,7 +131,6 @@ namespace Data_Access_Layer.Repositories
                     {
                         Message_Datetime = (DateTime)rdr["message_datetime"],
                         Message_Text = rdr["message_text"] as string,
-                        Message_Chat_Guid = (Guid)rdr["message_chat_guid"],
                         Message_Author = userdao.Get_Single_User((Guid)rdr["user_guid"])
                     }
                 );

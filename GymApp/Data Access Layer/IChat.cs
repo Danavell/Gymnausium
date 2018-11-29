@@ -10,7 +10,7 @@ namespace Data_Access_Layer
     interface IChat
     {
         //Add message to a pre-existing chat
-        Task<bool>Add_Message(Message message);
+        Task<bool>Add_Message(Message message, Guid chat_guid);
 
         //Create new chat
         Task<bool> Create_Chat(Guid chat_guid, IEnumerable<Guid> participants, string group_name);
