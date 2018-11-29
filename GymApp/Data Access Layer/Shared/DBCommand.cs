@@ -44,7 +44,7 @@ namespace Data_Access_Layer.Shared
             }
         }
 
-        public void AddQueryParamters(string key, float value)
+        public void AddQueryParamters(string key, double value)
         {
             IDataParameter param = DBComponentsFactory.ComponentProvider.CreateParameter();
             param.ParameterName = key;

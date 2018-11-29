@@ -1,21 +1,23 @@
-﻿using System;
+﻿using Model_Layer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
-using Model_Layer;
 
-namespace Data_Access_Layer
+namespace GymApp
 {
-    interface IChat
+    [ServiceContract]
+    public interface IChatService
     {
-        //Add message to a pre-existing chat
-        Task<bool>Add_Message(Message message);
+        [OperationContract]
+        Task<bool> Add_Message(Message message);
 
-        //Create new chat
+        [OperationContract]
         Task<bool> Create_Chat(Guid chat_guid, IEnumerable<Guid> participants, string group_name);
 
-        //Return all chats associated to a user
+        [OperationContract]
         IEnumerable<Chat> Retrieve_Chats(Guid user_guid, int start_position, int chat_range, double latitude, double longitude);
     }
 }

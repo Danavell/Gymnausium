@@ -12,7 +12,7 @@ namespace Data_Access_Layer.Repositories
     {
         static void Main(string[] args)
         {
-            InternalInfoUser iiu = new InternalInfoUser(new Guid(), 0, 100, "email", "password", "fname", "lname", 100, "desc");
+            InternalInfoUser iiu = new InternalInfoUser(new Guid(), "Male", 100, "email", "password", "fname", "lname", 100, "desc");
             Console.WriteLine(new UserDAO().Create(iiu));
         }
     }

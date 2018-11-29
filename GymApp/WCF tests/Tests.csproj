@@ -73,7 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChatDB_Tests.cs" />
-    <Compile Include="DB_Tests.cs" />
+    <Compile Include="UserDB_Tests.cs" />
     <Compile Include="WCF_Tests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

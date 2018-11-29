@@ -8,6 +8,7 @@ using Unity;
 using Data_Access_Layer;
 using Unity.Wcf;
 using Data_Access_Layer.Repositories;
+using GymApp;
 
 namespace Host
 {
@@ -18,6 +19,7 @@ namespace Host
             UnityContainer container = new UnityContainer();
             container.RegisterType<IUserDAO, UserDAO>();
             container.RegisterType<IUserService, UserService>();
+            container.RegisterType<IChatService, IChatService>();
 
             using (UnityServiceHost serviceHost = new UnityServiceHost(container, typeof(UserService)))
             {

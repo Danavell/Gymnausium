@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Database_Tests
 {
     [TestClass]
-    public class Database_Tests
+    public class UserDB_Tests
     {
         [TestMethod]
         public void Create_User_Test() { 
@@ -38,12 +38,33 @@ namespace Database_Tests
             Assert.IsTrue(x);
         }
 
+        [TestMethod]
+        public void Determine_Gender_ID()
+        {
+            UserDAO us = new UserDAO();
+            Assert.IsTrue(us.Determine_Gender_ID("Female") == 1);
+        }
+
+        [TestMethod]
+        public void Determine_Gender_Label()
+        {
+            UserDAO us = new UserDAO();
+            Assert.IsTrue(us.Determine_Gender_Label(0) == "Male");
+        }
         public async Task<bool> Create_Outcome()
         {
             UserDAO userDAO = new UserDAO();
             Guid g = Guid.NewGuid();
 
-            return await userDAO.Create(new InternalInfoUser(g, 0, 100, "email", "password", "fname", "lname", 100, "desc"));
+            return await userDAO.Create(new InternalInfoUser(g, "Male", 100, "email", "password", "fname", "lname", 100, "desc"));
+        }
+
+        [TestMethod]
+        public void Get_Single_ExternalInfoUser()
+        {
+            UserDAO us = new UserDAO();
+            Guid guid = new Guid("67C4E11D-97DC-49C1-85FB-84516519AA7E");
+            Assert.IsTrue(us.Get_Single_User(guid).First_Name.Equals("fname"));
         }
 
         public async Task<Guid?> Validation_Outcome(string email, string password)
@@ -56,7 +77,7 @@ namespace Database_Tests
         {
             UserDAO userDAO = new UserDAO();
             Guid g = Guid.NewGuid();
-            return await userDAO.Update(new InternalInfoUser(g, 0, 100, "email", "password", "fname", "lname", 100, "desc"));
+            return await userDAO.Update(new InternalInfoUser(g, "Male", 100, "email", "password", "fname", "lname", 100, "desc"));
         }
     }
 }

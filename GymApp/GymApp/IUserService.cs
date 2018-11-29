@@ -1,9 +1,6 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.Text;
 using System.Threading.Tasks;
 using Model_Layer;
 
@@ -20,10 +17,14 @@ namespace GymAppService
         Task<bool> Update(InternalInfoUser user);
 
         [OperationContract]
+        Task<bool> Update_Filters(Guid user_guid);
+
+        [OperationContract]
         Task<bool> Disable(ExternalInfoUser user);
 
         [OperationContract]
         Task<bool> BlockUser(ExternalInfoUser user);
+
         [OperationContract]
         Task<Guid?> Login_Validation(string email, string password);
 

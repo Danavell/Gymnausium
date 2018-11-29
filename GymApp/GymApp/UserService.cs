@@ -7,16 +7,18 @@ using System.Text;
 using Model_Layer;
 using Data_Access_Layer;
 using System.Threading.Tasks;
+using GymApp;
 
 namespace GymAppService
 {
     public class UserService : IUserService
     {
-        IUserDAO _dao;   
+        readonly IUserDAO _dao;
+
         public UserService() { }
         public UserService(IUserDAO dao)
         {
-            this._dao = dao;
+            _dao = dao;
         }
         
         public async Task<bool> Create(InternalInfoUser user)
@@ -24,7 +26,7 @@ namespace GymAppService
             return await _dao.Create(user);
         }
 
-        public async Task<bool> Disable(ExternalInfoUser user)
+        public Task<bool> Disable(ExternalInfoUser user)
         {
             throw new NotImplementedException();
         }
@@ -39,6 +41,11 @@ namespace GymAppService
             return await _dao.Update(user);
         }
 
+        public Task<bool> Update_Filters(Guid user_guid)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<bool> BlockUser(ExternalInfoUser user)
         {
             throw new NotImplementedException();
@@ -49,6 +56,7 @@ namespace GymAppService
             return await _dao.Login_Validation(email, password);
         }
     }
+
     public class MockDAO : IUserDAO
     {
         public Task<bool> Create(InternalInfoUser user)

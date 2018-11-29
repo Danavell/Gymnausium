@@ -11,6 +11,21 @@ namespace Data_Access_Layer.Repositories
 {
     class ChatDAO : IChat
     {
+        public async Task<bool> Add_Message(Message message)
+        {
+            return await Task.FromResult(Insert_Message(message));
+        }
+
+        public async Task<bool> Create_Chat(Guid chat_guid, IEnumerable<Guid> participants, string group_name)
+        {
+            return await Task.FromResult(Add_chat(chat_guid, participants, group_name));
+        }
+
+        public IEnumerable<Chat> Retrieve_Chats(Guid user_guid, int message_range, int chat_range, double latitude, double longitude)
+        {
+            throw new NotImplementedException();
+        }
+
         private bool Insert_Message(Message message)
         {
             /*READUNCOMMITTED
@@ -77,7 +92,7 @@ namespace Data_Access_Layer.Repositories
             }
         }
 
-        public IEnumerable<Chat> Return_Chats(Guid user_guid, int start_position, int chat_range)
+        private IEnumerable<Chat> Return_Chats(Guid user_guid, int start_position, int chat_range, double latitude, double longitude)
         {
             var result_set = new List<Chat>();
 
@@ -91,28 +106,37 @@ namespace Data_Access_Layer.Repositories
                 result_set.Add(
                     new Chat()
                     {
-                        Chat_Guid = (Guid)rdr["user_guid"]
+                        Chat_Guid = (Guid)rdr["chat_guid"],
+                        Messages = Chat_Return_Messages((Guid)rdr["chat_guid"])
                     }
                 );
             });
 
-
             return result_set;
         }
 
-        public async Task<bool> Add_Message(Message message)
+        private IEnumerable<Message> Chat_Return_Messages(Guid chat_guid)
         {
-            return await Task.FromResult(Insert_Message(message));
-        }
+            var command = new DBCommand("SELECT TOP 20 * FROM [Message] WHERE chat_guid = @CHAT_GUID");
 
-        public async Task<bool> Create_Chat(Guid chat_guid, IEnumerable<Guid> participants, string group_name)
-        {
-            return await Task.FromResult(Add_chat(chat_guid, participants, group_name));
-        }
+            var result_set = new List<Message>();
 
-        public IEnumerable<Chat> Retrieve_Chats(Guid user_guid, int message_range, int chat_range)
-        {
-            throw new NotImplementedException();
+            UserDAO userdao = new UserDAO();
+
+            command.AddQueryParamters("@CHAT_GUID", chat_guid);
+            command.ExecuteReaderWithRowAction((rdr) =>
+            {
+                result_set.Add(
+                    new Message()
+                    {
+                        Message_Datetime = (DateTime)rdr["message_datetime"],
+                        Message_Text = rdr["message_text"] as string,
+                        Message_Chat_Guid = (Guid)rdr["message_chat_guid"],
+                        Message_Author = userdao.Get_Single_User((Guid)rdr["user_guid"])
+                    }
+                );
+            });
+            return result_set;
         }
     }
 }

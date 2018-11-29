@@ -23,9 +23,9 @@ namespace Model_Layer
         [DataMember] public int Age { get; set; }
         [DataMember] public string Description { get; set; }
         [DataMember] public int Weight { get; set; }
-        [DataMember] public int Gender { get; set; }
+        [DataMember] public string Gender { get; set; }
         public User() { }
-        public User(Guid user_guid, int gender, int weight, string fname, int age, string desc)
+        public User(Guid user_guid, string gender, int weight, string fname, int age, string desc)
         {
             User_Guid = user_guid;
             First_Name = fname;
