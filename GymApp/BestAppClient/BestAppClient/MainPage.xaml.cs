@@ -29,7 +29,8 @@ namespace BestAppClient
         private void ButtonClicked(object sender, EventArgs e)
         {
             var name = username.Text;
-            var pass = password.Text;
+            var pass = Encrypt.EncryptString(password.Text);
+
 
             Validate(name, pass);
             if (Validate(name, pass))
