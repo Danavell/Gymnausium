@@ -14,15 +14,16 @@ namespace BestAppClient.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ChatCollection : ContentPage
 	{
+        ListUsersViewModel viewModel;
 		public ChatCollection ()
 		{
 			InitializeComponent ();
-            BindingContext = new ListChatViewModel();
+            BindingContext = viewModel = new ListUsersViewModel();
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
 
-        }
+        }        
     }
 }

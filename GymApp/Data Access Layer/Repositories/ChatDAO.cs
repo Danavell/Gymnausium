@@ -42,7 +42,7 @@ namespace Data_Access_Layer.Repositories
 
                 command.AddQueryParamters("@DateTime", message.Message_Datetime);
                 command.AddQueryParamters("@MessageText", message.Message_Text);
-                command.AddQueryParamters("@MessageChatGuid", message.Message_Chat_Guid);
+                // command.AddQueryParamters("@MessageChatGuid", message.Message_Chat_Guid); property moved to chat
                 command.AddQueryParamters("@UserGuid", message.Message_Author.User_Guid);
 
                 command.ExecuteNonQuery();

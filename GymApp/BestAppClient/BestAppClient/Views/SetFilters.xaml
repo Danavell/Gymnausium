@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="BestAppClient.Views.SetFilters" 
+             Title="Set Filters">
+    <ContentPage.Content>
+        <TableView Intent="Settings">
+            <TableRoot>
+                <TableSection>
+                    <SwitchCell x:Name="GenderSwitch" Text="Filter Gender" OnChanged="GenderSwitch_OnChanged" />
+                    <ViewCell >
+                        <Picker IsVisible="False" x:Name="GengerPicker" SelectedIndex="{Binding Gender}" HorizontalOptions="CenterAndExpand">
+                            <Picker.Items>
+                                <x:String>Male</x:String>
+                                <x:String>Female</x:String>
+                                <x:String>Either</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </ViewCell>
+                </TableSection>
+                <TableSection>
+                    <SwitchCell x:Name="WeightSwitch" Text="Filter Weight" OnChanged="WeightSwitch_OnChanged" />
+                    <ViewCell>
+                        <Slider x:Name="WeightSliderMinimum" Maximum="150" IsVisible="False" ThumbColor="Blue" Value="70" ValueChanged="WeightSliderMinimum_ValueChanged" MinimumTrackColor="Blue"/>
+                    </ViewCell>
+                    <ViewCell>
+                        <Slider x:Name="WeightSliderMaximum" Maximum="150" IsVisible="False" ThumbColor="Blue" Value="100" ValueChanged="WeightSliderMaximum_ValueChanged" MinimumTrackColor="Blue"/>
+                    </ViewCell>
+
+                </TableSection>
+                <TableSection>
+                    <SwitchCell x:Name="AgeSwitch" Text="Filter Age" OnChanged="AgeSwitch_OnChanged" />
+                    <ViewCell>
+                        <Slider x:Name="AgeSliderMinimum"  Maximum="100" IsVisible="False" ThumbColor="Blue" Value="18" ValueChanged="AgeSliderMinimum_ValueChanged" MinimumTrackColor="Blue"/>
+                    </ViewCell>
+                    <ViewCell>
+                        <Slider x:Name="AgeSliderMaximum"  Maximum="100" IsVisible="False" ThumbColor="Blue" Value="30" ValueChanged="AgeSliderMaximum_ValueChanged" MinimumTrackColor="Blue"/>
+                    </ViewCell>
+                </TableSection>
+            </TableRoot>
+        </TableView>
+    </ContentPage.Content>
+</ContentPage>

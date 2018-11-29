@@ -4,6 +4,35 @@
              x:Class="BestAppClient.Views.ChatCollection"
              Title="Matches">
     <ContentPage.Content>
-       
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*" />
+                    <RowDefinition Height="90*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*" />
+                    <ColumnDefinition Width="70*" />
+                    <ColumnDefinition Width="15*" />
+                </Grid.ColumnDefinitions>
+                <Image Source="Icon.png" Scale="0.7" Grid.Row="0" Grid.Column="0" />
+                <SearchBar Placeholder="Search" VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.Column="1" />
+                <Image Source="Icon.png" Scale="0.5" Grid.Row="0" Grid.Column="2" />
+                <ListView Grid.Row="1" Grid.ColumnSpan="3"	
+                ItemsSource="{Binding UserCollection}"	
+                          ItemSelected="ListView_ItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ImageCell ImageSource="Icon.png"	
+                            Text="{Binding First_Name}"	
+                            Detail="{Binding Description}"	
+                            TextColor="Black"	
+                            DetailColor="LightGray">
+                            </ImageCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
