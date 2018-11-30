@@ -2,8 +2,11 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Data_Access_Layer.Repositories;
+using System.Threading.Tasks;
+using Model_Layer;
 
-namespace WCF_tests
+namespace Database_Tests
 {
     /// <summary>
     /// Summary description for ChatDB_Tests
@@ -11,59 +14,67 @@ namespace WCF_tests
     [TestClass]
     public class ChatDB_Tests
     {
-        public ChatDB_Tests()
+        [TestMethod]
+        public void Add_Chat()
         {
-            //
-            // TODO: Add constructor logic here
-            //
+            bool x = Insert_Chat().Result;
+            Assert.IsTrue(x);
         }
-
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
+    
+        [TestMethod]
+        public void Add_Message()
         {
-            get
-            {
-                return testContextInstance;
-            }
-            set
-            {
-                testContextInstance = value;
-            }
+            bool x = Insert_Message().Result;
+            Assert.IsTrue(x);
         }
-
-        #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
 
         [TestMethod]
-        public void TestMethod1()
+        public void Retrieve_Chats()
         {
-            //
-            // TODO: Add test logic here
-            //
+            List<Chat> chats = (List<Chat>)Return_Chats().Result;
+            Assert.IsTrue(chats[0].Message_Chat_Guid == new Guid("FC5F04A8-BEAC-40B0-9EFA-358995C272BC"));
+        }
+
+        public async Task<IEnumerable<Chat>> Return_Chats()
+        {
+            Guid guid = new Guid("398D626F-75BE-48DD-9F5C-08B73BAF405D");
+            ChatDAO chat_dao = new ChatDAO();
+
+            return await chat_dao.Retrieve_Chats(
+                new Guid("398D626F-75BE-48DD-9F5C-08B73BAF405D"),
+                20,
+                0,
+                20,
+                0,
+                9.954167,
+                57.037278
+               );
+        }
+
+        public async Task<bool> Insert_Chat()
+        {
+            Guid chat_guid = Guid.NewGuid();
+            ChatDAO chat_dao = new ChatDAO();
+
+            List<Guid> participants = new List<Guid>();
+
+            Guid one = new Guid("398D626F-75BE-48DD-9F5C-08B73BAF405D");
+            Guid two = new Guid("67C4E11D-97DC-49C1-85FB-84516519AA7E");
+            Guid three = new Guid("9B0CFEBB-3EBD-4A49-86D3-87FB51E5C395");
+
+            return await chat_dao.Create_Chat(chat_guid, participants, "");
+        }
+
+        public async Task<bool> Insert_Message()
+        {
+            ChatDAO chat_dao = new ChatDAO();
+
+            Message message = new Message();
+            message.Message_Author = new ExternalInfoUser() { User_Guid = new Guid("398D626F-75BE-48DD-9F5C-08B73BAF405D") };
+            message.Message_Text = "Hell yeah!";
+            message.Message_Datetime = DateTime.UtcNow;
+
+            return await chat_dao.Add_Message(message, new Guid("FC5F04A8-BEAC-40B0-9EFA-358995C272BC"));
         }
     }
 }

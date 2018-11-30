@@ -33,11 +33,11 @@ namespace Data_Access_Layer.Repositories
                 DBCommand command = new DBCommand("INSERT INTO [user] (" +
                     "user_guid, first_name, last_name, gender, age, weigh, descrip) " +
                     "VALUES (@Guid, @Fname, @Lname, @Gender, @Age, @Weight, @Descr)", transaction);
-
+                
                 command.AddQueryParamters("@Guid", user.User_Guid);
                 command.AddQueryParamters("@Fname", user.First_Name);
                 command.AddQueryParamters("@Lname", user.Last_Name);
-                command.AddQueryParamters("@Gender", user.Gender);
+                command.AddQueryParamters("@Gender", Determine_Gender_ID(user.Gender));
                 command.AddQueryParamters("@Age", user.Age);
                 command.AddQueryParamters("@Weight", user.Weight);
                 command.AddQueryParamters("@Descr", user.Description);

@@ -56,7 +56,7 @@ namespace Database_Tests
             UserDAO userDAO = new UserDAO();
             Guid g = Guid.NewGuid();
 
-            return await userDAO.Create(new InternalInfoUser(g, "Male", 100, "email", "password", "fname", "lname", 100, "desc"));
+            return await userDAO.Create(new InternalInfoUser(g, "Male", 100, "email@email", "password", "fname", "lname", 100, "desc"));
         }
 
         [TestMethod]
