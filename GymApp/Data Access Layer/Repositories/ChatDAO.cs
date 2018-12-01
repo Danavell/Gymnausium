@@ -41,7 +41,7 @@ namespace Data_Access_Layer.Repositories
                 command.AddQueryParamters("@DATE_TIME", message.Message_Datetime);
                 command.AddQueryParamters("@MESSAGE_TEXT", message.Message_Text);
                 command.AddQueryParamters("@MESSAGE_CHAT_GUID", chat_guid); 
-                command.AddQueryParamters("@USER_GUID", message.Message_Author.User_Guid);
+                command.AddQueryParamters("@USER_GUID", message.User_Guid);
 
                 Update_Last_Modified_User_Chat(message, chat_guid, transaction);
 
@@ -62,7 +62,7 @@ namespace Data_Access_Layer.Repositories
             DBCommand update_command = new DBCommand("UPDATE [User_Chat] SET last_modified = GETUTCDATE() WHERE chat_guid = @CHAT_GUID AND user_guid = @USER_GUID", transaction);
 
             update_command.AddQueryParamters("@CHAT_GUID", chat_guid);
-            update_command.AddQueryParamters("@USER_GUID", message.Message_Author.User_Guid);
+            update_command.AddQueryParamters("@USER_GUID", message.User_Guid);
 
             update_command.ExecuteNonQuery();
         }
@@ -142,7 +142,7 @@ namespace Data_Access_Layer.Repositories
                     {
                         Message_Datetime = (DateTime)rdr["message_datetime"],
                         Message_Text = rdr["message_text"] as string,
-                        Message_Author = userdao.Get_Single_User((Guid)rdr["user_guid"], latitude, longitude)
+                        User_Guid = (Guid)rdr["user_guid"]
                     }
                 );
             });

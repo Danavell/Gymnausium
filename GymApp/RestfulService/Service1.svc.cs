@@ -31,9 +31,9 @@ namespace RestfulService
             throw new NotImplementedException();
         }
 
-        public async Task<bool> CreateUser(string user_guid, string gender, string weight, string email, string password, string fname, string lname, string age, string desc)
+        public bool CreateUser(string user_guid, string gender, string weight, string email, string password, string fname, string lname, string age, string desc)
         {
-            return await _dao.Create(new InternalInfoUser(Guid.NewGuid(), gender, Convert.ToInt16(weight), email, password, fname, lname, Convert.ToInt16(age), desc));
+            return _dao.Create(new InternalInfoUser(Guid.NewGuid(), gender, Convert.ToInt32(weight), email, password, fname, lname, Convert.ToInt16(age), desc)).Result;
         }
 
         public Task<bool> DisableUser(string user_guid)

@@ -73,7 +73,7 @@ namespace Database_Tests
 
             Message message = new Message
             {
-                Message_Author = new ExternalInfoUser() { User_Guid = new Guid("398D626F-75BE-48DD-9F5C-08B73BAF405D") },
+                User_Guid = new Guid("398D626F-75BE-48DD-9F5C-08B73BAF405D"),
                 Message_Text = "Hell yeah!",
                 Message_Datetime = DateTime.UtcNow
             };

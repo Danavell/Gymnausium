@@ -18,7 +18,7 @@ namespace RestfulService
 
         [OperationContract]
         [WebGet(UriTemplate = "CreateUser/{user_guid}/{gender}/{weight}/{email}/{password}/{fname}/{lname}/{age}/{desc}", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        Task<bool> CreateUser(string user_guid, string gender, string weight, string email, string password, string fname, string lname, string age, string desc);
+        bool CreateUser(string user_guid, string gender, string weight, string email, string password, string fname, string lname, string age, string desc);
 
         [OperationContract]
         [WebGet(UriTemplate = "UpdateUser/{user_guid}/{gender}/{weight}/{email}/{password}/{fname}/{lname}/{age}/{desc}", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]

@@ -19,7 +19,8 @@ namespace BestAppClient.ViewModels
 
                 List<Message> messages = new List<Message>();
 
-                message.Message_Author = new ExternalInfoUser(new Guid(), "Dave", 18, "male", 80, "fuck this",100,new Filters());
+                //message.Message_Author = new ExternalInfoUser(new Guid(), "Dave", 18, "male", 80, "fuck this",100,new Filters());
+                message.User_Guid = new Guid();
                 message.Message_Text = "Whats up bro?";
                 messages.Add(message);
                 chat.Messages = messages;

@@ -13,8 +13,8 @@ namespace RestfulService
     interface IChat_Service
     {
         [OperationContract]
-        [WebGet(UriTemplate = "Add_Message/{Message_Datetime}/{Message_Text}/{Message_Author}/{chat_guid}", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
-        bool Add_Message(string Message_DateTime, string Message_Text, string Message_Author, string chat_guid);
+        [WebGet(UriTemplate = "Add_Message/{Message_Datetime}/{Message_Text}/{user_guid}/{chat_guid}", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
+        bool Add_Message(string Message_DateTime, string Message_Text, string user_guid, string chat_guid);
 
         [OperationContract]
         [WebGet(UriTemplate = "Create_Chat/{}/{chat_guid}/{particpants}/{group_name}", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
