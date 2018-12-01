@@ -15,6 +15,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data_Access_Layer", "Data Access Layer\Data_Access_Layer.csproj", "{77AAD16A-7B01-483E-B677-ACB7B0E3B7E9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host", "Host\Host.csproj", "{9B99408C-1733-454D-8105-CC65B172D799}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8F29BB3C-AB61-41EB-B5FD-BAC6841F954E} = {8F29BB3C-AB61-41EB-B5FD-BAC6841F954E}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BestAppClient", "BestAppClient\BestAppClient\BestAppClient.csproj", "{698DECA2-B303-4939-852E-5FFD04C98A0C}"
 EndProject

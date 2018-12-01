@@ -22,7 +22,7 @@ namespace BestAppClient
 
             if (Validate(pair.Key, pair.Value))
             {
-                LoginAsync(); //Comment to disable auto login
+                /*LoginAsync()*/; //Comment to disable auto login
             }
         }
         private async void SignUpButtonClicked(object sender, EventArgs e)
@@ -59,7 +59,7 @@ namespace BestAppClient
         private bool Validate(string username, string password)
         {
             WebClient proxy = new WebClient();
-            proxy.DownloadStringAsync(new Uri("http://localhost:52703/Service1.svc/DisableUser/" + password));
+            proxy.DownloadStringAsync(new Uri("http://localhost:52703/Service1.svc/DisableUser/1"));
             proxy.DownloadStringCompleted += proxy_DownloadLoginCompleted;
 
               

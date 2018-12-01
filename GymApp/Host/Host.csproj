@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.Xml.Linq" />
@@ -66,10 +67,9 @@
       <Project>{77aad16a-7b01-483e-b677-acb7b0e3b7e9}</Project>
       <Name>Data_Access_Layer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GymApp\GymAppService.csproj">
-      <Project>{bc904640-ff70-443c-b0cc-4ef300be2988}</Project>
-      <Name>GymAppService</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

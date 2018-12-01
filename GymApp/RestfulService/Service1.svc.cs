@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Model_Layer;
 using Data_Access_Layer;
+using Data_Access_Layer.Repositories;
 
 namespace RestfulService
 {
@@ -16,19 +17,23 @@ namespace RestfulService
     public class Service1 : IService1
     {
         IUserDAO _dao;
-        public Service1() { }
-        public Service1(IUserDAO dao)
+        //public Service1(IUserDAO dao)
+        //{
+        //    this._dao = dao;
+        //}
+
+        public Service1()
         {
-            this._dao = dao;
+            _dao = new UserDAO();
         }
         public Task<bool> BlockUser(string user_guid, string target_guid)
         {
             throw new NotImplementedException();
         }
 
-        public Task<bool> CreateUser(string user_guid, string gender, string weight, string email, string password, string fname, string lname, string age, string desc)
+        public async Task<bool> CreateUser(string user_guid, string gender, string weight, string email, string password, string fname, string lname, string age, string desc)
         {
-            throw new NotImplementedException();
+            return await _dao.Create(new InternalInfoUser(Guid.NewGuid(), gender, Convert.ToInt16(weight), email, password, fname, lname, Convert.ToInt16(age), desc));
         }
 
         public Task<bool> DisableUser(string user_guid)
@@ -46,7 +51,7 @@ namespace RestfulService
             var guid = new Guid?();
             if (email == "email" && password == "password")
                 return Task.Run(() => guid);
-            else return null;
+            else return Task.Run(() => new Guid?());
         }
 
         public Task<bool> UpdateFilters(string user_guid)
