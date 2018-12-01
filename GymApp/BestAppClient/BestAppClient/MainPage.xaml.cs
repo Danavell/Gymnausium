@@ -7,6 +7,9 @@ using Xamarin.Forms;
 using System.Diagnostics;
 using Xamarin.Essentials;
 using BestAppClient.Views;
+using System.Net;
+using System.IO;
+using System.Runtime.Serialization.Json;
 
 namespace BestAppClient
 {
@@ -29,8 +32,8 @@ namespace BestAppClient
         private void ButtonClicked(object sender, EventArgs e)
         {
             var name = username.Text;
-            var pass = Encrypt.EncryptString(password.Text);
-
+            var pass = password.Text;
+            //var pass = Encrypt.EncryptString(password.Text);
 
             Validate(name, pass);
             if (Validate(name, pass))
@@ -55,14 +58,24 @@ namespace BestAppClient
         /// <returns></returns>
         private bool Validate(string username, string password)
         {
-            //connect to database, get guid on succesful login
-            //if successful
-            //App.guid =  
-            if (username == "123" && password == "123")
+            WebClient proxy = new WebClient();
+            proxy.DownloadStringAsync(new Uri("http://localhost:52703/Service1.svc/DisableUser/" + password));
+            proxy.DownloadStringCompleted += proxy_DownloadLoginCompleted;
+
+              
+            //if (username == "123" && password == "123")
                 return true;
-            else
-                return false;
+            //else
+            //    return false;
         }
+        private void proxy_DownloadLoginCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            Stream stream = new MemoryStream(Encoding.Unicode.GetBytes(e.Result));
+            DataContractJsonSerializer obj = new DataContractJsonSerializer(typeof(Task<Guid?>));
+            Task<bool> result = obj.ReadObject(stream) as Task<bool>;
+            Debug.Write(result);
+        }
+
         private async Task GetLocation()
         {
             try
