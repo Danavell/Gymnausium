@@ -15,7 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\GymApp\GymAppService.csproj" />
     <ProjectReference Include="..\..\Model Layer\Model_Layer.csproj" />
   </ItemGroup>
 
