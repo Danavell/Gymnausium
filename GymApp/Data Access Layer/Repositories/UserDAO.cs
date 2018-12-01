@@ -30,9 +30,7 @@ namespace Data_Access_Layer.Repositories
 
             try
             {
-                DBCommand command = new DBCommand("INSERT INTO [user] (" +
-                    "user_guid, first_name, last_name, gender, age, weigh, descrip) " +
-                    "VALUES (@Guid, @Fname, @Lname, @Gender, @Age, @Weight, @Descr)", transaction);
+                DBCommand command = new DBCommand("INSERT INTO [user] (user_guid, first_name, last_name, gender, age, weigh, descrip) VALUES (@Guid, @Fname, @Lname, @Gender, @Age, @Weight, @Descr)", transaction);
                 
                 command.AddQueryParamters("@Guid", user.User_Guid);
                 command.AddQueryParamters("@Fname", user.First_Name);
@@ -44,15 +42,10 @@ namespace Data_Access_Layer.Repositories
 
                 command.ExecuteNonQuery();
 
-                DBCommand second_command = new DBCommand("INSERT INTO [user_Account_Info] (" +
-                    "email, password, last_login, account_active, user_guid) " +
-                    "VALUES (@Email, @Password, @Last_Login, @Account_Active, @User_Guid)",
-                    transaction);
+                DBCommand second_command = new DBCommand("INSERT INTO [user_Account_Info] (email, password, last_login, account_active, user_guid) VALUES (@Email, @Password, GETUTCDATE(), 1, @User_Guid)", transaction);
 
                 second_command.AddQueryParamters("@Email", user.Email);
                 second_command.AddQueryParamters("@Password", user.Password);
-                second_command.AddQueryParamters("@Last_Login", DateTime.UtcNow);
-                second_command.AddQueryParamters("@Account_Active", 1);
                 second_command.AddQueryParamters("@User_Guid", user.User_Guid);
 
                 second_command.ExecuteNonQuery();
@@ -73,10 +66,7 @@ namespace Data_Access_Layer.Repositories
 
             try
             {
-                DBCommand command = new DBCommand("UPDATE [User] " +
-                    "SET user_guid = @Guid, first_name = @Fname, last_name = @Lname, gender = @Gender, age = @Age, weigh = @Weight, descrip = @Description" +
-                    "WHERE Guid = @Guid)",
-                    transaction);
+                DBCommand command = new DBCommand("UPDATE [User] SET user_guid = @Guid, first_name = @Fname, last_name = @Lname, gender = @Gender, age = @Age, weigh = @Weight, descrip = @Description WHERE Guid = @Guid)", transaction);
 
                 command.AddQueryParamters("@Guid", user.User_Guid);
                 command.AddQueryParamters("@Fname", user.First_Name);
@@ -89,10 +79,7 @@ namespace Data_Access_Layer.Repositories
 
                 command.ExecuteNonQuery();
 
-                DBCommand second_command = new DBCommand("UPDATE [User] " +
-                    "SET user_guid = email = @Email, password = @Password, last_login = @Last_Login, account_active = @Account_Active" +
-                    "WHERE user_guid = @Guid)",
-                    transaction);
+                DBCommand second_command = new DBCommand("UPDATE [User] SET user_guid = email = @Email, password = @Password, last_login = @Last_Login, account_active = @Account_Active WHERE user_guid = @Guid)", transaction);
 
                 second_command.AddQueryParamters("@Email", user.Email);
                 second_command.AddQueryParamters("@Password", user.Password);
@@ -154,7 +141,7 @@ namespace Data_Access_Layer.Repositories
                         Determine_Gender_Label((int)rdr["gender"]),
                         (int)rdr["weigh"],
                         rdr["descrip"] as string,
-                        (double)rdr["distance"],
+                        (int)rdr["distance"],
                         Get_Filters((Guid)rdr["user_guid"])
                     )
                 );
@@ -163,10 +150,12 @@ namespace Data_Access_Layer.Repositories
             return (outcome, resultList);
         }
 
-        public ExternalInfoUser Get_Single_User(Guid user_guid)
+        public ExternalInfoUser Get_Single_User(Guid user_guid, double latitude, double longitude)
         {
             DBCommand command = new DBCommand("EXEC Message_Return_User @LAT = @lat, @LONG = @long, @USER_GUID = @user_guid");
-            command.AddQueryParamters("@USER_GUID", user_guid);
+            command.AddQueryParamters("@user_guid", user_guid);
+            command.AddQueryParamters("@lat", latitude);
+            command.AddQueryParamters("@long", longitude);
 
             ExternalInfoUser user = new ExternalInfoUser();
 
@@ -175,11 +164,11 @@ namespace Data_Access_Layer.Repositories
                 user.User_Guid = (Guid)rdr["user_guid"];
                 user.First_Name = rdr["first_name"] as string;
                 user.Age = (int)rdr["age"];
-                user.Gender = Determine_Gender_Label((int)rdr["gender"]);
+                user.Gender = rdr["gender_label"] as string;
                 user.Weight = (int)rdr["weigh"];
                 user.Description = rdr["descrip"] as string;
-                user.Distance = (double)rdr["distance"];
-                Get_Filters((Guid)rdr["user_guid"]);
+                user.Distance = rdr["distance"] as double?;
+                //Get_Filters((Guid)rdr["user_guid"]);
             });
             return user;
         }

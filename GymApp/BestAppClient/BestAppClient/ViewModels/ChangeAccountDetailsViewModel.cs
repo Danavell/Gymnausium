@@ -21,12 +21,11 @@ namespace BestAppClient.ViewModels
                 Email = "123@ucn.dk",
                 First_Name = "Sama",
                 Last_Name = "Lama",
-                Gender = 1,
+                Gender = "Female",
                 Weight = 77,
                 Description = "askjdjkafh kashdfkhafk laksjflkasjf  salkfj lajsdflkj ",
                 Password = "123",
             };
-            GenderIndex = User.Gender;
         }
     }
 }

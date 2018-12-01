@@ -36,14 +36,14 @@ namespace Data_Access_Layer.Repositories
 
             try
             {
-                DBCommand command = new DBCommand("INSERT INTO [Message] (" +
-                      "message_datetime, message_text, message_chat_guid, user_guid) " +
-                      "VALUES (@DateTime, @MessageText, @MessageChatGuid, @UserGuid)", transaction);
+                DBCommand command = new DBCommand("INSERT INTO [Message] (message_datetime, message_text, message_chat_guid, user_guid) VALUES (@DATE_TIME, @MESSAGE_TEXT, @MESSAGE_CHAT_GUID, @USER_GUID)", transaction);
 
-                command.AddQueryParamters("@DateTime", message.Message_Datetime);
-                command.AddQueryParamters("@MessageText", message.Message_Text);
-                command.AddQueryParamters("@MessageChatGuid", chat_guid); 
-                command.AddQueryParamters("@UserGuid", message.Message_Author.User_Guid);
+                command.AddQueryParamters("@DATE_TIME", message.Message_Datetime);
+                command.AddQueryParamters("@MESSAGE_TEXT", message.Message_Text);
+                command.AddQueryParamters("@MESSAGE_CHAT_GUID", chat_guid); 
+                command.AddQueryParamters("@USER_GUID", message.Message_Author.User_Guid);
+
+                Update_Last_Modified_User_Chat(message, chat_guid, transaction);
 
                 command.ExecuteNonQuery();
 
@@ -57,28 +57,35 @@ namespace Data_Access_Layer.Repositories
             }
         }
 
+        private void Update_Last_Modified_User_Chat(Message message, Guid chat_guid, TransactionContext transaction)
+        {
+            DBCommand update_command = new DBCommand("UPDATE [User_Chat] SET last_modified = GETUTCDATE() WHERE chat_guid = @CHAT_GUID AND user_guid = @USER_GUID", transaction);
+
+            update_command.AddQueryParamters("@CHAT_GUID", chat_guid);
+            update_command.AddQueryParamters("@USER_GUID", message.Message_Author.User_Guid);
+
+            update_command.ExecuteNonQuery();
+        }
+
         private bool Add_chat(Guid chat_guid, List<Guid> participants, string group_name)
         {
             var transaction = TransactionContext.New(IsolationLevel.ReadUncommitted);
 
             try
             {
-                DBCommand command = new DBCommand("INSERT INTO [Chat] (" +
-                    "chat_guid, chat_group_name) " +
-                    "VALUES (@Guid, @Group_Name)", transaction);
+                DBCommand command = new DBCommand("INSERT INTO [Chat] (chat_guid, chat_group_name) VALUES (@GUID, @GROUP_NAME)", transaction);
 
-                command.AddQueryParamters("@Guid", chat_guid);
-                command.AddQueryParamters("@Group_Name", group_name);
+                command.AddQueryParamters("@GUID", chat_guid);
+                command.AddQueryParamters("@GROUP_NAME", group_name);
                 command.ExecuteNonQuery();
 
                 foreach (Guid user_guid in participants)
                 {
-                    DBCommand second = new DBCommand("INSERT INTO [User_Chat] (" +
-                        "user_guid, chat_guid) " +
-                        "VALUES (@User_Guid, @Chat_Guid)", transaction);
+                    DBCommand second = new DBCommand("INSERT INTO [User_Chat] (user_guid, chat_guid, last_modified) VALUES (@USER_GUID, @CHAT_GUID, GETUTCDATE())", transaction);
 
-                    second.AddQueryParamters("@User_Guid", user_guid);
-                    second.AddQueryParamters("@Chat_Guid", chat_guid);
+                    second.AddQueryParamters("@USER_GUID", user_guid);
+                    second.AddQueryParamters("@CHAT_GUID", chat_guid);
+
                     second.ExecuteNonQuery();
                 }
 
@@ -96,19 +103,20 @@ namespace Data_Access_Layer.Repositories
         {
             var result_set = new List<Chat>();
 
-            var command = new DBCommand("SELECT TOP @CHAT_RANGE * FROM [Chat] INNER JOIN [User_Chat] ON [Chat].chat_guid = [User_Chat].chat_guid WHERE ROWNUM >= @START_POSITION AND user_guid = @USER_GUID");
+            var command = new DBCommand("SELECT TOP (@RANGE) * FROM ( SELECT ROW_NUMBER() OVER (ORDER BY last_modified) AS row_number, chat_guid, user_guid, last_modified FROM [User_Chat]) AS foo WHERE user_guid = @USER_GUID AND row_number >= (@START)");
 
-            command.AddQueryParamters("@CHAT_RANGE", chat_range);
-            command.AddQueryParamters("@START_POSITION", chat_start_position);
+            command.AddQueryParamters("@RANGE", chat_range);
             command.AddQueryParamters("@USER_GUID", user_guid);
-            
+            command.AddQueryParamters("@START", chat_start_position);
+
             command.ExecuteReaderWithRowAction((rdr) =>
             {
                 result_set.Add(
                     new Chat()
                     {
-                        Message_Chat_Guid = (Guid)rdr["chat_guid"],
-                        Messages = Chat_Return_Messages((Guid)rdr["chat_guid"], message_range, message_start_position)
+                        Chat_Guid = (Guid)rdr["chat_guid"],
+                        Messages = Chat_Return_Messages((Guid)rdr["chat_guid"], message_range, message_start_position, latitude, longitude),
+                        Last_Modified = (DateTime)rdr["last_modified"]
                     }
                 );
             });
@@ -116,17 +124,17 @@ namespace Data_Access_Layer.Repositories
             return result_set;
         }
 
-        private IEnumerable<Message> Chat_Return_Messages(Guid chat_guid, int message_range, int message_start_position)
+        private IEnumerable<Message> Chat_Return_Messages(Guid chat_guid, int message_range, int message_start_position, double latitude, double longitude)
         {
-            var command = new DBCommand("SELECT TOP @MESSAGE_RANGE * FROM [Message] WHERE ROWNUM >= @START_POSITION AND chat_guid = @CHAT_GUID");
-
+            var command = new DBCommand("SELECT TOP 8 * FROM ( SELECT ROW_NUMBER() OVER (ORDER BY message_datetime) AS row_number, message_datetime, message_text, message_chat_guid, user_guid FROM [Message]) AS foo WHERE message_chat_guid = 'BD7E4018-4794-4C17-917B-E1BFC0185143' AND row_number >= (@START)");
+    
             var result_set = new List<Message>();
 
             UserDAO userdao = new UserDAO();
 
-            command.AddQueryParamters("@MESSAGE_RANGE", message_range);
-            command.AddQueryParamters("@START_POSITION", message_start_position);
+            command.AddQueryParamters("@RANGE", message_range);
             command.AddQueryParamters("@CHAT_GUID", chat_guid);
+            command.AddQueryParamters("@START", message_start_position);
             command.ExecuteReaderWithRowAction((rdr) =>
             {
                 result_set.Add(
@@ -134,7 +142,7 @@ namespace Data_Access_Layer.Repositories
                     {
                         Message_Datetime = (DateTime)rdr["message_datetime"],
                         Message_Text = rdr["message_text"] as string,
-                        Message_Author = userdao.Get_Single_User((Guid)rdr["user_guid"])
+                        Message_Author = userdao.Get_Single_User((Guid)rdr["user_guid"], latitude, longitude)
                     }
                 );
             });

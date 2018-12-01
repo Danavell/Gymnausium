@@ -56,16 +56,16 @@ namespace Database_Tests
             UserDAO userDAO = new UserDAO();
             Guid g = Guid.NewGuid();
 
-            return await userDAO.Create(new InternalInfoUser(g, "Male", 100, "email@email", "password", "fname", "lname", 100, "desc"));
+            return await userDAO.Create(new InternalInfoUser(g, "Male", 100, "fuck@email", "password", "fname", "lname", 100, "desc"));
         }
 
-        [TestMethod]
-        public void Get_Single_ExternalInfoUser()
-        {
-            UserDAO us = new UserDAO();
-            Guid guid = new Guid("67C4E11D-97DC-49C1-85FB-84516519AA7E");
-            Assert.IsTrue(us.Get_Single_User(guid).First_Name.Equals("fname"));
-        }
+        //[TestMethod]
+        //public void Get_Single_ExternalInfoUser()
+        //{
+        //    UserDAO us = new UserDAO();
+        //    Guid guid = new Guid("67C4E11D-97DC-49C1-85FB-84516519AA7E");
+        //    Assert.IsTrue(us.Get_Single_User(guid).First_Name.Equals("fname"));
+        //}
 
         public async Task<Guid?> Validation_Outcome(string email, string password)
         {

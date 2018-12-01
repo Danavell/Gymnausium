@@ -32,12 +32,13 @@ namespace Database_Tests
         public void Retrieve_Chats()
         {
             List<Chat> chats = (List<Chat>)Return_Chats().Result;
-            Assert.IsTrue(chats[0].Message_Chat_Guid == new Guid("FC5F04A8-BEAC-40B0-9EFA-358995C272BC"));
+            Assert.IsTrue(chats[1].Chat_Guid == new Guid("BD7E4018-4794-4C17-917B-E1BFC0185143"));
+            
+
         }
 
         public async Task<IEnumerable<Chat>> Return_Chats()
         {
-            Guid guid = new Guid("398D626F-75BE-48DD-9F5C-08B73BAF405D");
             ChatDAO chat_dao = new ChatDAO();
 
             return await chat_dao.Retrieve_Chats(
@@ -56,11 +57,12 @@ namespace Database_Tests
             Guid chat_guid = Guid.NewGuid();
             ChatDAO chat_dao = new ChatDAO();
 
-            List<Guid> participants = new List<Guid>();
-
-            Guid one = new Guid("398D626F-75BE-48DD-9F5C-08B73BAF405D");
-            Guid two = new Guid("67C4E11D-97DC-49C1-85FB-84516519AA7E");
-            Guid three = new Guid("9B0CFEBB-3EBD-4A49-86D3-87FB51E5C395");
+            List<Guid> participants = new List<Guid>
+            {
+                new Guid("398D626F-75BE-48DD-9F5C-08B73BAF405D"),
+                new Guid("67C4E11D-97DC-49C1-85FB-84516519AA7E"),
+                new Guid("9B0CFEBB-3EBD-4A49-86D3-87FB51E5C395")
+            };
 
             return await chat_dao.Create_Chat(chat_guid, participants, "");
         }
@@ -69,12 +71,14 @@ namespace Database_Tests
         {
             ChatDAO chat_dao = new ChatDAO();
 
-            Message message = new Message();
-            message.Message_Author = new ExternalInfoUser() { User_Guid = new Guid("398D626F-75BE-48DD-9F5C-08B73BAF405D") };
-            message.Message_Text = "Hell yeah!";
-            message.Message_Datetime = DateTime.UtcNow;
+            Message message = new Message
+            {
+                Message_Author = new ExternalInfoUser() { User_Guid = new Guid("398D626F-75BE-48DD-9F5C-08B73BAF405D") },
+                Message_Text = "Hell yeah!",
+                Message_Datetime = DateTime.UtcNow
+            };
 
-            return await chat_dao.Add_Message(message, new Guid("FC5F04A8-BEAC-40B0-9EFA-358995C272BC"));
+            return await chat_dao.Add_Message(message, new Guid("BD7E4018-4794-4C17-917B-E1BFC0185143"));
         }
     }
 }
