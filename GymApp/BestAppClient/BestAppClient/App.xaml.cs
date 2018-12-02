@@ -1,7 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using BestAppClient.Views;
 using Xamarin.Essentials;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,12 +14,13 @@ namespace BestAppClient
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new MainPage());
+           // MainPage = new NavigationPage(new MainPage());
             // MainPage = new ChatCollection();
         }
 
         protected override void OnStart()
         {
+            MainPage = new NavigationPage(new MainPage());
             // Handle when your app starts
         }
 
@@ -60,7 +60,7 @@ namespace BestAppClient
         /// <summary>
         /// Remove password from device's storage
         /// </summary>
-        public static void LogOutFromDevice()
+        public static async void LogOutFromDevice()
         {
             SecureStorage.Remove("password");
         }

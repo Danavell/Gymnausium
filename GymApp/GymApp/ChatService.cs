@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Model_Layer;
 
-namespace GymApp
+namespace GymAppService
 {
     class ChatService : IChatService
     {

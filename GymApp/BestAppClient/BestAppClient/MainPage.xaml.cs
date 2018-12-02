@@ -59,7 +59,7 @@ namespace BestAppClient
         private bool Validate(string username, string password)
         {
             WebClient proxy = new WebClient();
-            proxy.DownloadStringAsync(new Uri("http://localhost:52703/Service1.svc/DisableUser/1"));
+            proxy.DownloadStringAsync(new Uri("http://localhost:52703/Service1.svc/CreateUser/1/Male/80/bla@hole.males/password/fname/lname/20/description"));
             proxy.DownloadStringCompleted += proxy_DownloadLoginCompleted;
 
               
@@ -71,8 +71,8 @@ namespace BestAppClient
         private void proxy_DownloadLoginCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             Stream stream = new MemoryStream(Encoding.Unicode.GetBytes(e.Result));
-            DataContractJsonSerializer obj = new DataContractJsonSerializer(typeof(Task<Guid?>));
-            Task<bool> result = obj.ReadObject(stream) as Task<bool>;
+            DataContractJsonSerializer obj = new DataContractJsonSerializer(typeof(bool));
+            bool result = (bool)obj.ReadObject(stream);   
             Debug.Write(result);
         }
 
